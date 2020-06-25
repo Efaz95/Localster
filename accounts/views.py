@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
@@ -30,14 +32,34 @@ def register(request):
     return render(request, 'accounts/register.html', context)
 
 
-def login(request):
-    return render(request, 'accounts/login.html')
+def login_page(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.info(request, "User and/or Password is incorrect")
+            return render(request, 'accounts/login.html')
+
+    context = {}
+    return render(request, 'accounts/login.html', context)
 
 
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
+
+@login_required(login_url='login')
 def home(request):
     return render(request, 'accounts/home.html')
 
 
+@login_required(login_url='login')
 def account(request, un):
     influencer = InfluencerProfile.objects.get(user__username=un)
 
