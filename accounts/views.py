@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .forms import CreateProfileForm
+from .forms import CreateProfileForm, UpdateProfileForm
 from .models import InfluencerProfile
 
 
@@ -36,3 +36,19 @@ def login(request):
 
 def home(request):
     return render(request, 'accounts/home.html')
+
+
+def account(request, un):
+    influencer = InfluencerProfile.objects.get(user__username=un)
+
+    form = UpdateProfileForm()
+
+    if request.method == "POST":
+        form = UpdateProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return redirect('home')
+
+    context = {'influencer': influencer, 'form': form}
+    return render(request, 'accounts/home.html', context)

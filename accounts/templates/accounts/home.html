@@ -1,2 +1,13 @@
 <h1>Homepage</h1>
 
+{{ influencer.user.first_name }}
+{{ influencer.user.last_name }}
+{{ influencer.user.email }}
+{{ influencer.user.username }}
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Update">
+</form>
