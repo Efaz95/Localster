@@ -41,10 +41,10 @@ def home(request):
 def account(request, un):
     influencer = InfluencerProfile.objects.get(user__username=un)
 
-    form = UpdateProfileForm()
+    form = UpdateProfileForm(instance=influencer)
 
     if request.method == "POST":
-        form = UpdateProfileForm(request.POST)
+        form = UpdateProfileForm(request.POST, instance=influencer)
         if form.is_valid():
             form.save()
 
