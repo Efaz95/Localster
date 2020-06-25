@@ -1,0 +1,26 @@
+<h1>Registration Page</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+
+    <p>{{ form.first_name.label }}
+    {{ form.first_name }}</p>
+
+    <p>{{ form.last_name.label }}
+    {{ form.last_name }}</p>
+
+    <p>{{ form.username.label }}
+    {{ form.username }}</p>
+
+    <p>{{ form.email.label }}
+    {{ form.email }}</p>
+
+    <p>{{ form.password1.label }}
+    {{ form.password1 }}</p>
+
+    <p>{{ form.password2.label }}
+    {{ form.password2 }}</p>
+
+
+  <input type="submit" value="Create Account">
+</form>
