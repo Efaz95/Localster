@@ -1,11 +1,24 @@
 <h1>Homepage</h1>
 
-<p>Hey, {{ user.first_name }} {{ user.last_name }}</p>
-<p>Username: {{ user.username }}</p>
-<p>Email: {{ user.email }}</p>
-<p>Bio: {{ user.influencerprofile.bio }}</p>
-<p>Instagram Link: <a href="{{ user.influencerprofile.ig_link }}" target="_blank">{{ user.influencerprofile.ig_link }}</a></p>
-<p>Member since: {{ user.date_joined }}</p>
-<p><a href="{% url 'settings' user.username %}">Settings</a></p>
+{% if user.groups.all.0.name == "influencer" %}
+    <p>Hey, {{ user.first_name }} {{ user.last_name }}</p>
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Bio: {{ user.influencerprofile.bio }}</p>
+    <p>Instagram Link: <a href="{{ user.influencerprofile.ig_link }}" target="_blank">{{ user.influencerprofile.ig_link }}</a></p>
+    <p>Member since: {{ user.date_joined }}</p>
+{% endif %}
 
+{% if user.groups.all.0.name == "business" %}
+    <p>Hey, {{ user.first_name }} {{ user.last_name }}</p>
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Business name: {{ user.businessprofile.business_name }}</p>
+    <p>Address: {{ user.businessprofile.street_address }},
+                {{ user.businessprofile.zip_code }}</p>
+    <p>Member since: {{ user.date_joined }}</p>
+{% endif %}
+
+
+<p><a href="{% url 'settings' user.username %}">Settings</a></p>
 <p><a class="hello-msg" href="{% url 'logout' %}">Logout</a></p>
