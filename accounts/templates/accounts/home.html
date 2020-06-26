@@ -1,16 +1,20 @@
 <h1>Homepage</h1>
 
-{{ influencer.user.first_name }}
-{{ influencer.user.last_name }}
-{{ influencer.user.email }}
-{{ influencer.user.username }}
+{% if user.groups.all.0.name == "influencer" %}
+    <p>Welcome, {{ influencer.user.first_name }} {{ influencer.user.last_name }}</p>
+{% endif %}
+{% if user.groups.all.0.name == "business" %}
+    <p>Welcome, {{ business.user.first_name }} {{ business.user.last_name }}</p>
+{% endif %}
 
 
 <form action="" method="POST">
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
     <input type="submit" value="Update">
 </form>
+
+
 
 
 <a class="hello-msg" href="{% url 'logout' %}">Logout</a>
