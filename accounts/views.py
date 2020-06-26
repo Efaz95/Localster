@@ -67,9 +67,8 @@ def home(request):
 @login_required(login_url='login')
 def account(request, un):
     group = Group.objects.get(user__username=un)
-    print(f"🔥🔥🔥🔥  {group}")
 
-    if str(group) == "influencer":
+    if group.name == "influencer":
         influencer = InfluencerProfile.objects.get(user__username=un)
         form = UpdateInfProfileForm(instance=influencer)
 
@@ -83,7 +82,7 @@ def account(request, un):
         context = {'influencer': influencer, 'form': form}
         return render(request, 'accounts/home.html', context)
 
-    elif str(group) == "business":
+    elif group.name == "business":
         business = BusinessProfile.objects.get(user__username=un)
         form = UpdateBisProfileForm(instance=business)
 
