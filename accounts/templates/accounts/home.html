@@ -1,20 +1,11 @@
 <h1>Homepage</h1>
 
-{% if user.groups.all.0.name == "influencer" %}
-    <p>Welcome, {{ influencer.user.first_name }} {{ influencer.user.last_name }}</p>
-{% endif %}
-{% if user.groups.all.0.name == "business" %}
-    <p>Welcome, {{ business.user.first_name }} {{ business.user.last_name }}</p>
-{% endif %}
+<p>Hey, {{ user.first_name }} {{ user.last_name }}</p>
+<p>Username: {{ user.username }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Bio: {{ user.influencerprofile.bio }}</p>
+<p>Instagram Link: <a href="{{ user.influencerprofile.ig_link }}" target="_blank">{{ user.influencerprofile.ig_link }}</a></p>
+<p>Member since: {{ user.date_joined }}</p>
+<p><a href="{% url 'settings' user.username %}">Settings</a></p>
 
-
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update">
-</form>
-
-
-
-
-<a class="hello-msg" href="{% url 'logout' %}">Logout</a>
+<p><a class="hello-msg" href="{% url 'logout' %}">Logout</a></p>

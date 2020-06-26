@@ -45,7 +45,7 @@ def login_page(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(f'/account/{username}')
+            return redirect('/')
         else:
             messages.info(request, "User and/or Password is incorrect")
             return render(request, 'accounts/login.html')
@@ -61,11 +61,14 @@ def logout_user(request):
 
 @login_required(login_url='login')
 def home(request):
-    return render(request, 'accounts/home.html')
+    user = request.user
+    print(f"🔥🔥 {user}")
+    context = {'user': user}
+    return render(request, 'accounts/home.html', context)
 
 
 @login_required(login_url='login')
-def account(request, un):
+def account_settings(request, un):
     group = Group.objects.get(user__username=un)
 
     if group.name == "influencer":
@@ -80,7 +83,7 @@ def account(request, un):
                 return redirect('home')
 
         context = {'influencer': influencer, 'form': form}
-        return render(request, 'accounts/home.html', context)
+        return render(request, 'accounts/settings.html', context)
 
     elif group.name == "business":
         business = BusinessProfile.objects.get(user__username=un)
@@ -94,4 +97,4 @@ def account(request, un):
                 return redirect('home')
 
         context = {'business': business, 'form': form}
-        return render(request, 'accounts/home.html', context)
+        return render(request, 'accounts/settings.html', context)
