@@ -31,12 +31,17 @@
         <input type="submit">
     </form>
 
-    {% if inf2 is not None %}
-        <p>Result: <a href="{{ inf2.ig_link }}" target="_blank">IG link for {{ inf2.user.first_name }} {{ inf2.user.last_name }}</a></p>
+    {% if searched_inf is not None %}
+        <p>Result: <a href="{{ searched_inf.ig_link }}" target="_blank">IG link for {{ searched_inf.user.first_name }} {{ searched_inf.user.last_name }}</a></p>
     {% endif %}
 
     <button>
         <a href="{% url 'messages' %}">Send a message</a>
     </button>
+
+    <p>Your messages:</p>
+    {% for message in messages %}
+        <p>{{ message.msg_content }} - FROM: {{ message.sender }}</p>
+    {% endfor %}
 
 {% endblock %}
