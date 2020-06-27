@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 
-from .models import InfluencerProfile, BusinessProfile
+from .models import InfluencerProfile, BusinessProfile, Messages
 
 
 class CreateProfileForm(UserCreationForm):
@@ -22,3 +22,9 @@ class UpdateBisProfileForm(ModelForm):
     class Meta:
         model = BusinessProfile
         fields = ['business_name', 'street_address', 'zip_code']
+
+
+class MessagesForm(ModelForm):
+    class Meta:
+        model = Messages
+        fields = '__all__'

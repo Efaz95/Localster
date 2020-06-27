@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message</title>
+</head>
+<body>
+
+{##}
+{#    {{ form }}#}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <label>Send to:</label>
+    <input type="text" name="msg_receiver">
+    <br>
+    <br>
+    <label>Message:</label>
+    <textarea name="msg_content"></textarea>
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

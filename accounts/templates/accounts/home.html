@@ -35,4 +35,8 @@
         <p>Result: <a href="{{ inf2.ig_link }}" target="_blank">IG link for {{ inf2.user.first_name }} {{ inf2.user.last_name }}</a></p>
     {% endif %}
 
+    <button>
+        <a href="{% url 'messages' %}">Send a message</a>
+    </button>
+
 {% endblock %}

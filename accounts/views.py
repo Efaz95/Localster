@@ -7,8 +7,8 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django import template
 from django.contrib.auth.models import User
-from .forms import CreateProfileForm, UpdateInfProfileForm, UpdateBisProfileForm
-from .models import InfluencerProfile, BusinessProfile
+from .forms import CreateProfileForm, UpdateInfProfileForm, UpdateBisProfileForm, MessagesForm
+from .models import InfluencerProfile, BusinessProfile, Messages
 
 
 def register(request):
@@ -105,3 +105,18 @@ def account_settings(request, un):
 
         context = {'business': business, 'form': form}
         return render(request, 'accounts/settings.html', context)
+
+
+def user_messages(request):
+
+    if request.method == "POST":
+        sender = request.user
+        receiver_name = request.POST.get('msg_receiver')
+        receiver = User.objects.get(username=receiver_name)
+        msg_content = request.POST.get('msg_content')
+
+        Messages.objects.create(sender=sender, reciever=receiver, msg_content=msg_content)
+
+        print(f"🔥🔥🔥Send From: {sender}, Send to:{receiver}, Msg: {msg_content}")
+
+    return render(request, 'accounts/messages.html')

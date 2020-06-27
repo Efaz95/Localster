@@ -19,3 +19,10 @@ class BusinessProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
+
+
+class Messages(models.Model):
+    sender = models.ForeignKey(User, related_name="sender", on_delete=models.CASCADE)
+    reciever = models.ForeignKey(User, related_name="receiver", on_delete=models.CASCADE)
+    msg_content = models.TextField(max_length=200, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True, null=True)
