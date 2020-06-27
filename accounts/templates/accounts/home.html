@@ -28,20 +28,20 @@
         {% csrf_token %}
         <label for="infsearch">Search Influencers:</label>
         <input type="search" id="infsearch" name="infsearch">
-        <input type="submit">
+        <input type="submit" value="search">
     </form>
 
     {% if searched_inf is not None %}
         <p>Result: <a href="{{ searched_inf.ig_link }}" target="_blank">IG link for {{ searched_inf.user.first_name }} {{ searched_inf.user.last_name }}</a></p>
-    {% endif %}
 
-    <button>
+        <button>
         <a href="{% url 'messages' %}">Send a message</a>
-    </button>
+        </button>
+    {% endif %}
 
     <p>Your messages:</p>
     {% for message in messages %}
-        <p>{{ message.msg_content }} - FROM: {{ message.sender }}</p>
+        <p>{{ message.msg_content }} - FROM: {{ message.sender.first_name }}</p>
     {% endfor %}
 
 {% endblock %}

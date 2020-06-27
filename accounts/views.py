@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 from .forms import CreateProfileForm, UpdateInfProfileForm, UpdateBisProfileForm, MessagesForm
 from .models import InfluencerProfile, BusinessProfile, Messages
 
+picked_user = None
+
 
 def register(request):
     form = CreateProfileForm()
@@ -66,6 +68,8 @@ def home(request):
     searched_inf = None
     if request.method == "POST":
         searched_inf = InfluencerProfile.objects.get(user__username=request.POST.get('infsearch'))
+        global picked_user
+        picked_user = searched_inf.user.username
 
     msg = Messages.objects.filter(reciever=user)
 
@@ -107,7 +111,6 @@ def account_settings(request, un):
 
 
 def user_messages(request):
-
     if request.method == "POST":
         sender = request.user
         receiver_name = request.POST.get('msg_receiver')
@@ -118,4 +121,6 @@ def user_messages(request):
 
         print(f"🔥🔥🔥Send From: {sender}, Send to:{receiver}, Msg: {msg_content}")
 
-    return render(request, 'accounts/messages.html')
+    context = {"picked_user": picked_user}
+
+    return render(request, 'accounts/messages.html', context)
