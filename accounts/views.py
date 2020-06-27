@@ -61,9 +61,16 @@ def logout_user(request):
 
 @login_required(login_url='login')
 def home(request):
+    inf2 = None
+    if request.method == "POST":
+        inf1 = request.POST.get('infsearch')
+        print(f"🔥🔥🔥 + {inf1}")
+        inf2 = InfluencerProfile.objects.get(user__username=inf1)
+        print(f"🔥🔥🔥 + {inf2}")
+
     user = request.user
-    print(f"🔥🔥 {user}")
-    context = {'user': user}
+
+    context = {'user': user, 'inf2': inf2}
     return render(request, 'accounts/home.html', context)
 
 

@@ -1,4 +1,6 @@
-<h1>Settings</h1>
+{% extends 'accounts/main.html' %}
+
+{% block content %}
 
 {% if user.groups.all.0.name == "influencer" %}
     <p>Welcome, {{ influencer.user.first_name }} {{ influencer.user.last_name }}</p>
@@ -16,5 +18,4 @@
 
 
 
-<p><a href="{% url 'home' %}">Homepage</a></p>
-<a class="hello-msg" href="{% url 'logout' %}">Logout</a>
+{% endblock %}

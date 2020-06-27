@@ -1,24 +1,38 @@
-<h1>Homepage</h1>
+{% extends 'accounts/main.html' %}
 
-{% if user.groups.all.0.name == "influencer" %}
-    <p>Hey, {{ user.first_name }} {{ user.last_name }}</p>
-    <p>Username: {{ user.username }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Bio: {{ user.influencerprofile.bio }}</p>
-    <p>Instagram Link: <a href="{{ user.influencerprofile.ig_link }}" target="_blank">{{ user.influencerprofile.ig_link }}</a></p>
-    <p>Member since: {{ user.date_joined }}</p>
-{% endif %}
-
-{% if user.groups.all.0.name == "business" %}
-    <p>Hey, {{ user.first_name }} {{ user.last_name }}</p>
-    <p>Username: {{ user.username }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Business name: {{ user.businessprofile.business_name }}</p>
-    <p>Address: {{ user.businessprofile.street_address }},
-                {{ user.businessprofile.zip_code }}</p>
-    <p>Member since: {{ user.date_joined }}</p>
-{% endif %}
+{% block content %}
 
 
-<p><a href="{% url 'settings' user.username %}">Settings</a></p>
-<p><a class="hello-msg" href="{% url 'logout' %}">Logout</a></p>
+    {% if user.groups.all.0.name == "influencer" %}
+        <p>Hey, {{ user.first_name }} {{ user.last_name }}</p>
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Bio: {{ user.influencerprofile.bio }}</p>
+        <p>Instagram Link: <a href="{{ user.influencerprofile.ig_link }}"
+                              target="_blank">{{ user.influencerprofile.ig_link }}</a></p>
+        <p>Member since: {{ user.date_joined }}</p>
+    {% endif %}
+
+    {% if user.groups.all.0.name == "business" %}
+        <p>Hey, {{ user.first_name }} {{ user.last_name }}</p>
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Business name: {{ user.businessprofile.business_name }}</p>
+        <p>Address: {{ user.businessprofile.street_address }},
+            {{ user.businessprofile.zip_code }}</p>
+        <p>Member since: {{ user.date_joined }}</p>
+    {% endif %}
+
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="infsearch">Search Influencers:</label>
+        <input type="search" id="infsearch" name="infsearch">
+        <input type="submit">
+    </form>
+
+    {% if inf2 is not None %}
+        <p>Result: <a href="{{ inf2.ig_link }}" target="_blank">IG link for {{ inf2.user.first_name }} {{ inf2.user.last_name }}</a></p>
+    {% endif %}
+
+{% endblock %}
