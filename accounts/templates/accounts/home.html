@@ -53,14 +53,14 @@
         <input type="button" value="sync now" onClick="window.location.reload();">
         <hr>
         <h6>Outbox</h6>
-<<<<<<< HEAD
+
         {% for message in outbox %}
             <ul>
                 <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
                 <hr>
             </ul>
         {% endfor %}
-=======
+
                 {% for x in outbox %}
             <ul>
                 <li>{{ x.reciever }}: {{ x.msg_content }}</li>
@@ -68,7 +68,7 @@
             </ul>
         {% endfor %}
 
->>>>>>> 885d6c52a6218415a8cc77e81262143b8573c6c7
+
     </div>
 
 

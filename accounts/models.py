@@ -19,8 +19,8 @@ class BusinessProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     business_name = models.CharField(max_length=200, null=True)
     street_address = models.CharField(max_length=200, null=True)
-    # city = models.CharField(max_length=200, null=True)
-    # state = models.CharField(max_length=200, null=True)
+    city = models.CharField(max_length=200, null=True)
+    state = models.CharField(max_length=200, null=True)
     zip_code = models.IntegerField(null=True)
 
     def __str__(self):

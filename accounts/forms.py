@@ -15,13 +15,13 @@ class CreateProfileForm(UserCreationForm):
 class UpdateInfProfileForm(ModelForm):
     class Meta:
         model = InfluencerProfile
-        fields = ['bio', 'ig_link']
+        fields = ['bio', 'ig_link', 'followers', 'city', 'state', 'zip_code']
 
 
 class UpdateBisProfileForm(ModelForm):
     class Meta:
         model = BusinessProfile
-        fields = ['business_name', 'street_address', 'zip_code']
+        fields = ['business_name', 'street_address', 'city', 'state', 'zip_code']
 
 
 class MessagesForm(ModelForm):
