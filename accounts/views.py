@@ -74,9 +74,10 @@ def home(request):
         global picked_user
         picked_user = searched_inf.user.username
 
-    msg = Messages.objects.filter(reciever=user)
+    inbox = Messages.objects.filter(reciever=user)
+    outbox = Messages.objects.filter(sender=user)
 
-    context = {'user': user, 'searched_inf': searched_inf, 'messages': msg, 'time_now': time_now}
+    context = {'user': user, 'searched_inf': searched_inf, 'inbox': inbox, 'outbox':outbox, 'time_now': time_now}
     return render(request, 'accounts/home.html', context)
 
 
