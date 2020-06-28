@@ -9,6 +9,8 @@ from django import template
 from django.contrib.auth.models import User
 from .forms import CreateProfileForm, UpdateInfProfileForm, UpdateBisProfileForm, MessagesForm
 from .models import InfluencerProfile, BusinessProfile, Messages
+import datetime
+
 
 picked_user = None
 
@@ -63,6 +65,7 @@ def logout_user(request):
 
 @login_required(login_url='login')
 def home(request):
+    time_now = datetime.datetime.now()
     user = request.user
 
     searched_inf = None
@@ -73,7 +76,7 @@ def home(request):
 
     msg = Messages.objects.filter(reciever=user)
 
-    context = {'user': user, 'searched_inf': searched_inf, 'messages': msg}
+    context = {'user': user, 'searched_inf': searched_inf, 'messages': msg, 'time_now': time_now}
     return render(request, 'accounts/home.html', context)
 
 

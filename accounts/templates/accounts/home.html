@@ -23,13 +23,14 @@
         <p>Member since: {{ user.date_joined }}</p>
     {% endif %}
 
-
-    <form action="" method="POST">
-        {% csrf_token %}
-        <label for="infsearch">Search Influencers:</label>
-        <input type="search" id="infsearch" name="infsearch">
-        <input type="submit" value="search">
-    </form>
+    {% if user.groups.all.0.name == "business" %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="infsearch">Search Influencers:</label>
+            <input type="search" id="infsearch" name="infsearch">
+            <input type="submit" value="search">
+        </form>
+    {% endif %}
 
     {% if searched_inf is not None %}
         <p>Result: <a href="{{ searched_inf.ig_link }}" target="_blank">IG link for {{ searched_inf.user.first_name }} {{ searched_inf.user.last_name }}</a></p>
@@ -39,9 +40,17 @@
         </button>
     {% endif %}
 
-    <p>Your messages:</p>
-    {% for message in messages %}
-        <p>{{ message.msg_content }} - FROM: {{ message.sender.first_name }}</p>
-    {% endfor %}
+    <div class="message_box">
+        <h6>Inbox</h6>
+        {% for message in messages %}
+            <ul>
+                <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
+                <hr>
+            </ul>
+        {% endfor %}
+        <span>last synced- {{ time_now.time }}</span>
+        <input type="button" value="sync now" onClick="window.location.reload();">
+    </div>
+
 
 {% endblock %}

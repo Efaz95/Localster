@@ -14,3 +14,18 @@ body {
 .text-muted {
     opacity: 0.5;
 }
+
+.message_box{
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #337ab7;
+    color: white;
+    text-align: center;
+}
