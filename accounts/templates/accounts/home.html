@@ -33,10 +33,11 @@
     {% endif %}
 
     {% if searched_inf is not None %}
-        <p>Result: <a href="{{ searched_inf.ig_link }}" target="_blank">IG link for {{ searched_inf.user.first_name }} {{ searched_inf.user.last_name }}</a></p>
+        <p>Result: <a href="{{ searched_inf.ig_link }}" target="_blank">IG link
+            for {{ searched_inf.user.first_name }} {{ searched_inf.user.last_name }}</a></p>
 
         <button>
-        <a href="{% url 'messages' %}">Send a message</a>
+            <a href="{% url 'messages' %}">Send a message</a>
         </button>
     {% endif %}
 
@@ -52,12 +53,22 @@
         <input type="button" value="sync now" onClick="window.location.reload();">
         <hr>
         <h6>Outbox</h6>
+<<<<<<< HEAD
         {% for message in outbox %}
             <ul>
                 <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
                 <hr>
             </ul>
         {% endfor %}
+=======
+                {% for x in outbox %}
+            <ul>
+                <li>{{ x.reciever }}: {{ x.msg_content }}</li>
+                <hr>
+            </ul>
+        {% endfor %}
+
+>>>>>>> 885d6c52a6218415a8cc77e81262143b8573c6c7
     </div>
 
 
