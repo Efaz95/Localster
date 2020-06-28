@@ -33,10 +33,11 @@
     {% endif %}
 
     {% if searched_inf is not None %}
-        <p>Result: <a href="{{ searched_inf.ig_link }}" target="_blank">IG link for {{ searched_inf.user.first_name }} {{ searched_inf.user.last_name }}</a></p>
+        <p>Result: <a href="{{ searched_inf.ig_link }}" target="_blank">IG link
+            for {{ searched_inf.user.first_name }} {{ searched_inf.user.last_name }}</a></p>
 
         <button>
-        <a href="{% url 'messages' %}">Send a message</a>
+            <a href="{% url 'messages' %}">Send a message</a>
         </button>
     {% endif %}
 
@@ -50,6 +51,15 @@
         {% endfor %}
         <span>last synced- {{ time_now.time }}</span>
         <input type="button" value="sync now" onClick="window.location.reload();">
+        <hr>
+        <h6>Outbox</h6>
+                {% for x in outbox %}
+            <ul>
+                <li>{{ x.reciever }}: {{ x.msg_content }}</li>
+                <hr>
+            </ul>
+        {% endfor %}
+
     </div>
 
 
