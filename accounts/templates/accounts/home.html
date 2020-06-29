@@ -37,7 +37,7 @@
     {% if searched_inf is not None %}
         {% for i in searched_inf %}
             <div>
-                <p>Result: <a href="{{ i.ig_link }}" target="_blank">IG link
+                <p>Result: <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">IG link
                     for {{ i.user.first_name }} {{ i.user.last_name }}</a>
                     <button onclick="myFunction()">Send Message</button>
                 </p>
@@ -48,7 +48,7 @@
             <form action="" method="POST">
                 {% csrf_token %}
                 <label>Send to:</label>
-                <input type="text" name="msg_receiver" value="{{ i.user.username }}">
+                <input type="text" name="msg_receiver"  size="30px" placeholder="hover over ig link to see the username">
                 <br>
                 <br>
                 <label>Message:</label>
