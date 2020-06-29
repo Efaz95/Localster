@@ -14,6 +14,7 @@
     {% endif %}
 
     {% if user.groups.all.0.name == "business" %}
+        <h3>{{ user.businessprofile.business_name }}</h3>
         <p>Hey, {{ user.first_name }} {{ user.last_name }}</p>
         <p>Username: {{ user.username }}</p>
         <p>Email: {{ user.email }}</p>
@@ -26,50 +27,54 @@
     {% if user.groups.all.0.name == "business" %}
         <form action="" method="POST">
             {% csrf_token %}
-            <label for="infsearch">Search Influencers:</label>
-            <input type="search" id="infsearch" name="infsearch">
-            <input type="submit" value="search">
+            {#            <label for="infsearch">Search Influencers</label>#}
+            {#            <input type="search" id="infsearch" name="infsearch">#}
+            {#            <input type="submit" value="search">#}
+            <input type="submit" value="Search Influencer in your local Area Now!">
         </form>
     {% endif %}
 
     {% if searched_inf is not None %}
-        <p>Result: <a href="{{ searched_inf.ig_link }}" target="_blank">IG link
-            for {{ searched_inf.user.first_name }} {{ searched_inf.user.last_name }}</a></p>
+        {% for i in searched_inf %}
+            <div>
+                <p>Result: <a href="{{ i.ig_link }}" target="_blank">IG link
+                    for {{ i.user.first_name }} {{ i.user.last_name }}</a>
+                    <button onclick="myFunction()">Send Message
+{#                        <a href="{% url 'messages' %}">Send a message</a>#}
+                    </button>
+                </p>
+            </div>
+        {% endfor %}
 
-        <button>
-            <a href="{% url 'messages' %}">Send a message</a>
-        </button>
+
+        <div id="msg" style="display: none">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label>Send to:</label>
+                <input type="text" name="msg_receiver" value="{{ None }}">
+                <br>
+                <br>
+                <label>Message:</label>
+                <textarea name="msg_content" rows="4" cols="50"></textarea>
+                <br>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
     {% endif %}
 
-    <div class="message_box">
-        <h6>Inbox</h6>
-        {% for message in inbox %}
-            <ul>
-                <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
-                <hr>
-            </ul>
-        {% endfor %}
-        <span>last synced- {{ time_now.time }}</span>
-        <input type="button" value="sync now" onClick="window.location.reload();">
-        <hr>
-        <h6>Outbox</h6>
 
-        {% for message in outbox %}
-            <ul>
-                <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
-                <hr>
-            </ul>
-        {% endfor %}
-
-                {% for x in outbox %}
-            <ul>
-                <li>{{ x.reciever }}: {{ x.msg_content }}</li>
-                <hr>
-            </ul>
-        {% endfor %}
-
-
-    </div>
+<script>
+    function myFunction() {
+  var x = document.getElementById("msg");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
 
 
 {% endblock %}

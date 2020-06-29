@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Message</title>
-</head>
-<body>
+{% extends 'accounts/main.html' %}
+
+{% block content %}
 
 
 <form action="" method="POST">
@@ -20,5 +16,34 @@
     <input type="submit" value="Submit">
 </form>
 
-</body>
-</html>
+
+<div class="message_box">
+    <h6>Inbox</h6>
+    {% for message in inbox %}
+        <ul>
+            <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
+            <hr>
+        </ul>
+    {% endfor %}
+    <span>last synced- {{ time_now.time }}</span>
+    <input type="button" value="sync now" onClick="window.location.reload();">
+    <hr>
+    <h6>Outbox</h6>
+    {% for message in outbox %}
+        <ul>
+            <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
+            <hr>
+        </ul>
+    {% endfor %}
+
+    {% for x in outbox %}
+        <ul>
+            <li>{{ x.reciever }}: {{ x.msg_content }}</li>
+            <hr>
+        </ul>
+    {% endfor %}
+
+
+</div>
+
+{% endblock %}

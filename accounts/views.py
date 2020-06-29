@@ -11,8 +11,7 @@ from .forms import CreateProfileForm, UpdateInfProfileForm, UpdateBisProfileForm
 from .models import InfluencerProfile, BusinessProfile, Messages
 import datetime
 
-
-picked_user = None
+# picked_user = None
 
 
 def register(request):
@@ -68,21 +67,15 @@ def home(request):
     time_now = datetime.datetime.now()
     user = request.user
 
+    picked_user = None
     searched_inf = None
     if request.method == "POST":
-        searched_inf = InfluencerProfile.objects.get(user__username=request.POST.get('infsearch'))
-        global picked_user
-        picked_user = searched_inf.user.username
+        user_zip = user.businessprofile.zip_code
+        searched_inf = InfluencerProfile.objects.filter(zip_code=user_zip)
+        # global picked_user
+        # picked_user = searched_inf.user.username
 
-    inbox = Messages.objects.filter(reciever=user)
-    outbox = Messages.objects.filter(sender=user)
-
-    context = {'user': user, 'searched_inf': searched_inf, 'inbox': inbox, 'outbox':outbox, 'time_now': time_now}
-
-    msg = Messages.objects.filter(reciever=user)
-    outbox = Messages.objects.filter(sender=user)
-
-    context = {'user': user, 'searched_inf': searched_inf, 'messages': msg, 'outbox': outbox, 'time_now': time_now}
+    context = {'user': user, 'searched_inf': searched_inf, 'time_now': time_now}
 
     return render(request, 'accounts/home.html', context)
 
@@ -121,6 +114,8 @@ def account_settings(request, un):
 
 
 def user_messages(request):
+    user = request.user
+
     if request.method == "POST":
         sender = request.user
         receiver_name = request.POST.get('msg_receiver')
@@ -129,8 +124,9 @@ def user_messages(request):
 
         Messages.objects.create(sender=sender, reciever=receiver, msg_content=msg_content)
 
-        print(f"🔥🔥🔥Send From: {sender}, Send to:{receiver}, Msg: {msg_content}")
+    inbox = Messages.objects.filter(reciever=user)
+    outbox = Messages.objects.filter(sender=user)
 
-    context = {"picked_user": picked_user}
+    context = {"picked_user": picked_user, 'inbox': inbox, 'outbox': outbox}
 
     return render(request, 'accounts/messages.html', context)

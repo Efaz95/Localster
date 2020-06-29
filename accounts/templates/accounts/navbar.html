@@ -8,7 +8,7 @@
     }
 </style>
 
-<nav class="navbar navbar-expand-lg" style="background-color: beige;">
+<nav class="navbar navbar-expand-lg" style="background-color: #dbd2b7;">
     <img src="{% static 'images/logo2.png' %}" height="25" width="200">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,7 @@
         </ul>
     </div>
 
+    <span><a class="hello-msg" href="{% url 'messages' %}">Messages</a></span>
     <span><a class="hello-msg" href="{% url 'settings' user.username %}">Settings</a></span>
     <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
 
