@@ -39,19 +39,16 @@
             <div>
                 <p>Result: <a href="{{ i.ig_link }}" target="_blank">IG link
                     for {{ i.user.first_name }} {{ i.user.last_name }}</a>
-                    <button onclick="myFunction()">Send Message
-{#                        <a href="{% url 'messages' %}">Send a message</a>#}
-                    </button>
+                    <button onclick="myFunction()">Send Message</button>
                 </p>
             </div>
         {% endfor %}
-
 
         <div id="msg" style="display: none">
             <form action="" method="POST">
                 {% csrf_token %}
                 <label>Send to:</label>
-                <input type="text" name="msg_receiver" value="{{ None }}">
+                <input type="text" name="msg_receiver" value="{{ i.user.username }}">
                 <br>
                 <br>
                 <label>Message:</label>
@@ -65,16 +62,16 @@
     {% endif %}
 
 
-<script>
-    function myFunction() {
-  var x = document.getElementById("msg");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-</script>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("msg");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 
 
 {% endblock %}
