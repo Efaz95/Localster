@@ -29,21 +29,21 @@
         {% endfor %}
 
 
-     <div id="msg" style="display: none">
-                <form action="{% url 'messages' %}" method="POST">
-                    {% csrf_token %}
-                    <label>Send to:</label>
-                    <input type="text" name="msg_receiver" size="40px"
-                           placeholder="hover over message to see the username">
-                    <br>
-                    <br>
-                    <label>Message:</label>
-                    <textarea name="msg_content" rows="4" cols="50"></textarea>
-                    <br>
-                    <br>
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
+        <div id="msg" style="display: none">
+            <form action="{% url 'messages' %}" method="POST">
+                {% csrf_token %}
+                <label>Send to:</label>
+                <input type="text" name="msg_receiver" size="40px"
+                       placeholder="hover over message to see the username">
+                <br>
+                <br>
+                <label>Message:</label>
+                <textarea name="msg_content" rows="4" cols="50"></textarea>
+                <br>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
 
 
         <span>last synced- {{ time_now.time }}</span>

@@ -63,7 +63,7 @@
                     {% csrf_token %}
                     <p>Result: <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">IG link
                         for {{ i.user.first_name }} {{ i.user.last_name }}</a>
-                        <button onclick="myFunction()">Send Message</button>
+                        <input type="button" onclick="myFunction()" value="Message">
                         <button value="{{ i.user }}" name="hired_influencer" onclick="clicked(event)">Hire</button>
                     </p>
                 </form>
@@ -98,9 +98,12 @@
             }
         }
 
+        /*
         function clicked(e) {
             if (!confirm('Select OK to confirm')) e.preventDefault();
         }
+         */
+
     </script>
 
 
