@@ -11,6 +11,7 @@ from .forms import CreateProfileForm, UpdateInfProfileForm, UpdateBisProfileForm
 from .models import InfluencerProfile, BusinessProfile, Messages, Hire
 import datetime
 
+
 # picked_user = None
 
 
@@ -81,9 +82,10 @@ def home(request):
             # picked_user = searched_inf.user.username
 
     hired_by_this_business = Hire.objects.filter(hired_by=request.user.id)
-    # print(f"🔥🔥 {hired_inf_by_business.hired_influencer}")
+    working_with = Hire.objects.filter(hired_influencer=request.user.id)
 
-    context = {'user': user, 'searched_inf': searched_inf, 'hired_by_this_business': hired_by_this_business}
+    context = {'user': user, 'searched_inf': searched_inf,
+               'hired_by_this_business': hired_by_this_business, 'working_with': working_with}
 
     return render(request, 'accounts/home.html', context)
 
@@ -139,7 +141,6 @@ def user_messages(request):
     context = {'inbox': inbox, 'outbox': outbox, 'time_now': time_now}
 
     return render(request, 'accounts/messages.html', context)
-
 
 # def hire(request):
 #     hired_by = request.user

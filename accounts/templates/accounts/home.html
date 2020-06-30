@@ -14,6 +14,15 @@
         <p>Member since: {{ user.date_joined }}</p>
         <button><a href="{% url 'settings' user.username %}">Update info</a></button>
         <button><a href="{% url 'messages' %}">Check messages</a></button>
+        <br>
+        <hr>
+        <h5>You are currently working with:</h5>
+        <ul>
+            {% for i in working_with %}
+                <li>{{ i.hired_by.businessprofile.business_name }}</li>
+            {% endfor %}
+        </ul>
+
     {% endif %}
 
     {% if user.groups.all.0.name == "business" %}
