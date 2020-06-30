@@ -47,7 +47,10 @@
         <h5>You are currently hiring:</h5>
         <ul>
             {% for i in hired_by_this_business %}
-                <li>{{ i.hired_influencer.first_name }} {{ i.hired_influencer.last_name }}</li>
+                <li>
+                    {{ i.hired_influencer.first_name }} {{ i.hired_influencer.last_name }}
+                    <button>work completed</button>
+                </li>
             {% endfor %}
         </ul>
 
@@ -61,7 +64,7 @@
                     <p>Result: <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">IG link
                         for {{ i.user.first_name }} {{ i.user.last_name }}</a>
                         <button onclick="myFunction()">Send Message</button>
-                        <button value="{{ i.user }}" name="hired_influencer">Hire</button>
+                        <button value="{{ i.user }}" name="hired_influencer" onclick="clicked(event)">Hire</button>
                     </p>
                 </form>
             </div>
@@ -93,6 +96,10 @@
             } else {
                 x.style.display = "none";
             }
+        }
+
+        function clicked(e) {
+            if (!confirm('Select OK to confirm')) e.preventDefault();
         }
     </script>
 
