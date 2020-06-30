@@ -10,6 +10,7 @@
         <p>Bio: {{ user.influencerprofile.bio }}</p>
         <p>Instagram Link: <a href="{{ user.influencerprofile.ig_link }}"
                               target="_blank">{{ user.influencerprofile.ig_link }}</a></p>
+        <p>Followers: {{ user.influencerprofile.followers }}</p>
         <p>Member since: {{ user.date_joined }}</p>
         <button><a href="{% url 'settings' user.username %}">Update info</a></button>
         <button><a href="{% url 'messages' %}">Check messages</a></button>
@@ -32,15 +33,28 @@
             {#            <input type="submit" value="search">#}
             <input type="submit" value="Search Influencer in your local Area Now!">
         </form>
+
+
+        <h5>You are currently hiring:</h5>
+        <ul>
+            {% for i in hired_by_this_business %}
+                <li>{{ i.hired_influencer.first_name }} {{ i.hired_influencer.last_name }}</li>
+            {% endfor %}
+        </ul>
+
     {% endif %}
 
     {% if searched_inf is not None %}
         {% for i in searched_inf %}
             <div>
-                <p>Result: <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">IG link
-                    for {{ i.user.first_name }} {{ i.user.last_name }}</a>
-                    <button onclick="myFunction()">Send Message</button>
-                </p>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <p>Result: <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">IG link
+                        for {{ i.user.first_name }} {{ i.user.last_name }}</a>
+                        <button onclick="myFunction()">Send Message</button>
+                        <button value="{{ i.user }}" name="hired_influencer">Hire</button>
+                    </p>
+                </form>
             </div>
         {% endfor %}
 

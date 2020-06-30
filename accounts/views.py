@@ -8,7 +8,7 @@ from django.contrib import messages
 from django import template
 from django.contrib.auth.models import User
 from .forms import CreateProfileForm, UpdateInfProfileForm, UpdateBisProfileForm, MessagesForm
-from .models import InfluencerProfile, BusinessProfile, Messages
+from .models import InfluencerProfile, BusinessProfile, Messages, Hire
 import datetime
 
 # picked_user = None
@@ -69,12 +69,21 @@ def home(request):
     picked_user = None
     searched_inf = None
     if request.method == "POST":
-        user_zip = user.businessprofile.zip_code
-        searched_inf = InfluencerProfile.objects.filter(zip_code=user_zip)
-        # global picked_user
-        # picked_user = searched_inf.user.username
+        if 'hired_influencer' in request.POST:
+            hired_by = request.user
+            hired_inf = request.POST.get('hired_influencer')
+            hired_inf1 = User.objects.get(username=hired_inf)
+            Hire.objects.create(hired_by=hired_by, hired_influencer=hired_inf1)
+        else:
+            user_zip = user.businessprofile.zip_code
+            searched_inf = InfluencerProfile.objects.filter(zip_code=user_zip)
+            # global picked_user
+            # picked_user = searched_inf.user.username
 
-    context = {'user': user, 'searched_inf': searched_inf}
+    hired_by_this_business = Hire.objects.filter(hired_by=request.user.id)
+    # print(f"🔥🔥 {hired_inf_by_business.hired_influencer}")
+
+    context = {'user': user, 'searched_inf': searched_inf, 'hired_by_this_business': hired_by_this_business}
 
     return render(request, 'accounts/home.html', context)
 
@@ -130,3 +139,9 @@ def user_messages(request):
     context = {'inbox': inbox, 'outbox': outbox, 'time_now': time_now}
 
     return render(request, 'accounts/messages.html', context)
+
+
+# def hire(request):
+#     hired_by = request.user
+#     hired_influencer = request.POST.get('')
+#     Hire.objects.create(hired_by=hired_by, hired_influencer=hired_influencer)

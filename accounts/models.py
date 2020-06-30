@@ -32,3 +32,8 @@ class Messages(models.Model):
     reciever = models.ForeignKey(User, related_name="receiver", on_delete=models.CASCADE)
     msg_content = models.TextField(max_length=200, null=True)
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
+
+
+class Hire(models.Model):
+    hired_by = models.ForeignKey(User, related_name="business", on_delete=models.CASCADE)
+    hired_influencer = models.ForeignKey(User, related_name="influencer", on_delete=models.CASCADE)
