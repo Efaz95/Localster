@@ -11,6 +11,8 @@
         <p>Instagram Link: <a href="{{ user.influencerprofile.ig_link }}"
                               target="_blank">{{ user.influencerprofile.ig_link }}</a></p>
         <p>Member since: {{ user.date_joined }}</p>
+        <button><a href="{% url 'settings' user.username %}">Update info</a></button>
+        <button><a href="{% url 'messages' %}">Check messages</a></button>
     {% endif %}
 
     {% if user.groups.all.0.name == "business" %}
@@ -22,9 +24,7 @@
         <p>Address: {{ user.businessprofile.street_address }},
             {{ user.businessprofile.zip_code }}</p>
         <p>Member since: {{ user.date_joined }}</p>
-    {% endif %}
 
-    {% if user.groups.all.0.name == "business" %}
         <form action="" method="POST">
             {% csrf_token %}
             {#            <label for="infsearch">Search Influencers</label>#}
@@ -48,7 +48,7 @@
             <form action="{% url 'messages' %}" method="POST">
                 {% csrf_token %}
                 <label>Send to:</label>
-                <input type="text" name="msg_receiver"  size="30px" placeholder="hover over ig link to see the username">
+                <input type="text" name="msg_receiver" size="40px" placeholder="hover over ig link to see the username">
                 <br>
                 <br>
                 <label>Message:</label>

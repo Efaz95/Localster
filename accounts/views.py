@@ -64,7 +64,6 @@ def logout_user(request):
 
 @login_required(login_url='login')
 def home(request):
-    time_now = datetime.datetime.now()
     user = request.user
 
     picked_user = None
@@ -75,7 +74,7 @@ def home(request):
         # global picked_user
         # picked_user = searched_inf.user.username
 
-    context = {'user': user, 'searched_inf': searched_inf, 'time_now': time_now}
+    context = {'user': user, 'searched_inf': searched_inf}
 
     return render(request, 'accounts/home.html', context)
 
@@ -114,6 +113,7 @@ def account_settings(request, un):
 
 
 def user_messages(request):
+    time_now = datetime.datetime.now()
     user = request.user
 
     if request.method == "POST":
@@ -127,6 +127,6 @@ def user_messages(request):
     inbox = Messages.objects.filter(reciever=user)
     outbox = Messages.objects.filter(sender=user)
 
-    context = {'inbox': inbox, 'outbox': outbox}
+    context = {'inbox': inbox, 'outbox': outbox, 'time_now': time_now}
 
     return render(request, 'accounts/messages.html', context)
