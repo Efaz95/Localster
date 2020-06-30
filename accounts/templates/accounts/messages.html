@@ -3,47 +3,81 @@
 {% block content %}
 
 
-<form action="" method="POST">
-    {% csrf_token %}
-    <label>Send to:</label>
-    <input type="text" name="msg_receiver" value="{{ picked_user }}">
-    <br>
-    <br>
-    <label>Message:</label>
-    <textarea name="msg_content" rows="4" cols="50"></textarea>
-    <br>
-    <br>
-    <input type="submit" value="Submit">
-</form>
+    {#<form action="" method="POST">#}
+    {#    {% csrf_token %}#}
+    {#    <label>Send to:</label>#}
+    {#    <input type="text" name="msg_receiver" value="{{ picked_user }}">#}
+    {#    <br>#}
+    {#    <br>#}
+    {#    <label>Message:</label>#}
+    {#    <textarea name="msg_content" rows="4" cols="50"></textarea>#}
+    {#    <br>#}
+    {#    <br>#}
+    {#    <input type="submit" value="Submit">#}
+    {#</form>#}
 
 
-<div class="message_box">
-    <h6>Inbox</h6>
-    {% for message in inbox %}
-        <ul>
-            <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
-            <hr>
-        </ul>
-    {% endfor %}
-    <span>last synced- {{ time_now.time }}</span>
-    <input type="button" value="sync now" onClick="window.location.reload();">
-    <hr>
-    <h6>Outbox</h6>
-    {% for message in outbox %}
-        <ul>
-            <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
-            <hr>
-        </ul>
-    {% endfor %}
-
-    {% for x in outbox %}
-        <ul>
-            <li>{{ x.reciever }}: {{ x.msg_content }}</li>
-            <hr>
-        </ul>
-    {% endfor %}
+    <div class="message_box">
+        <h6>Inbox</h6>
+        {% for message in inbox %}
+            <ul>
+                <li title="{{ message.sender.username }}">{{ message.sender.first_name }}: {{ message.msg_content }}
+                    <button onclick="myFunction()">Reply</button>
+                </li>
+                <hr>
+            </ul>
+        {% endfor %}
 
 
-</div>
+     <div id="msg" style="display: none">
+                <form action="{% url 'messages' %}" method="POST">
+                    {% csrf_token %}
+                    <label>Send to:</label>
+                    <input type="text" name="msg_receiver" size="35px"
+                           placeholder="hover over message to see the username">
+                    <br>
+                    <br>
+                    <label>Message:</label>
+                    <textarea name="msg_content" rows="4" cols="50"></textarea>
+                    <br>
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+
+
+        <span>last synced- {{ time_now.time }}</span>
+        <input type="button" value="sync now" onClick="window.location.reload();">
+        <hr>
+        <h6>Outbox</h6>
+        {% for message in outbox %}
+            <ul>
+                <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
+                <hr>
+            </ul>
+        {% endfor %}
+
+        {% for x in outbox %}
+            <ul>
+                <li>{{ x.reciever }}: {{ x.msg_content }}</li>
+                <hr>
+            </ul>
+        {% endfor %}
+
+
+    </div>
+
+
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("msg");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 
 {% endblock %}

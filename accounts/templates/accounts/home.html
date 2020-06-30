@@ -45,7 +45,7 @@
         {% endfor %}
 
         <div id="msg" style="display: none">
-            <form action="" method="POST">
+            <form action="{% url 'messages' %}" method="POST">
                 {% csrf_token %}
                 <label>Send to:</label>
                 <input type="text" name="msg_receiver"  size="30px" placeholder="hover over ig link to see the username">

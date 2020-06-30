@@ -127,6 +127,6 @@ def user_messages(request):
     inbox = Messages.objects.filter(reciever=user)
     outbox = Messages.objects.filter(sender=user)
 
-    context = {"picked_user": picked_user, 'inbox': inbox, 'outbox': outbox}
+    context = {'inbox': inbox, 'outbox': outbox}
 
     return render(request, 'accounts/messages.html', context)
