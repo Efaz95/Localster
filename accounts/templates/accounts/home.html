@@ -49,7 +49,7 @@
             {% for i in hired_by_this_business %}
                 <li>
                     {{ i.hired_influencer.first_name }} {{ i.hired_influencer.last_name }}
-                    <button>work completed</button>
+                    <button onclick="clicked(event)">work completed</button>
                 </li>
             {% endfor %}
         </ul>
@@ -98,11 +98,9 @@
             }
         }
 
-        /*
         function clicked(e) {
             if (!confirm('Select OK to confirm')) e.preventDefault();
         }
-         */
 
     </script>
 
