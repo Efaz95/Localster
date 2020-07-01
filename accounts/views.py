@@ -136,10 +136,13 @@ def user_messages(request):
         receiver = User.objects.get(username=receiver_name)
         msg_content = request.POST.get('msg_content')
 
-        Messages.objects.create(sender=sender, reciever=receiver, msg_content=msg_content)
+        Messages.objects.create(sender=sender, receiver=receiver, msg_content=msg_content)
 
-    inbox = Messages.objects.filter(reciever=user)
-    outbox = Messages.objects.filter(sender=user)
+    inbox = Messages.objects.filter(receiver=user).order_by('-timestamp')
+    outbox = Messages.objects.filter(sender=user).order_by('-timestamp')
+
+    # test = Messages.objects.filter(reciever=user).order_by('-timestamp').distinct('reciever_id')
+    # print(test)
 
     context = {'inbox': inbox, 'outbox': outbox, 'time_now': time_now}
 
