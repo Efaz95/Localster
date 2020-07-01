@@ -75,6 +75,9 @@ def home(request):
             hired_inf = request.POST.get('hired_influencer')
             hired_inf1 = User.objects.get(username=hired_inf)
             Hire.objects.create(hired_by=hired_by, hired_influencer=hired_inf1)
+        if 'unhired_id' in request.POST:
+            unhired_id = request.POST.get('unhired_id')
+            Hire.objects.get(id=unhired_id).delete()
         else:
             user_zip = user.businessprofile.zip_code
             searched_inf = InfluencerProfile.objects.filter(zip_code=user_zip)
