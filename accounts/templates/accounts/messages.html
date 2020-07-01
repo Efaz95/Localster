@@ -45,17 +45,11 @@
             </form>
         </div>
 
-
         <span>last synced- {{ time_now.time }}</span>
-        <input type="button" value="sync now" onClick="window.location.reload();">
+
+        <input type="button" value="sync now" onClick="window.location.href = window.location.href;">
         <hr>
         <h6>Outbox</h6>
-        {% for message in outbox %}
-            <ul>
-                <li>{{ message.sender.first_name }}: {{ message.msg_content }}</li>
-                <hr>
-            </ul>
-        {% endfor %}
 
         {% for x in outbox %}
             <ul>
@@ -63,7 +57,6 @@
                 <hr>
             </ul>
         {% endfor %}
-
 
     </div>
 
