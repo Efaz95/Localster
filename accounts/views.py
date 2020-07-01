@@ -142,8 +142,6 @@ def user_messages(request):
     inbox = Messages.objects.filter(receiver=user).order_by('-timestamp')
     outbox = Messages.objects.filter(sender=user).order_by('-timestamp')
 
-    print(f"🔥🔥🔥 {inbox[0].receiver}")
-
     context = {'inbox': inbox, 'outbox': outbox, 'time_now': time_now}
 
     return render(request, 'accounts/messages.html', context)

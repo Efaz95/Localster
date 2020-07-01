@@ -54,7 +54,7 @@
 
         {% for message in outbox %}
             <ul>
-                <li>{{ message.receiver }}: {{ message.msg_content }}</li>
+                <li>{{ message.receiver.first_name }}: {{ message.msg_content }}</li>
                 <small>-{{ message.timestamp }}</small>
                 <hr>
             </ul>
