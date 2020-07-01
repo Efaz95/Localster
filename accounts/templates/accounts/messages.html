@@ -24,6 +24,7 @@
                 <li title="{{ message.sender.username }}">{{ message.sender.first_name }}: {{ message.msg_content }}
                     <button onclick="myFunction()">Reply</button>
                 </li>
+                <small>-{{ message.timestamp }}</small>
                 <hr>
             </ul>
         {% endfor %}
@@ -51,9 +52,10 @@
         <hr>
         <h6>Outbox</h6>
 
-        {% for x in outbox %}
+        {% for message in outbox %}
             <ul>
-                <li>{{ x.receiver }}: {{ x.msg_content }}</li>
+                <li>{{ message.receiver }}: {{ message.msg_content }}</li>
+                <small>-{{ message.timestamp }}</small>
                 <hr>
             </ul>
         {% endfor %}

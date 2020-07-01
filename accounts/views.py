@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
@@ -141,8 +142,7 @@ def user_messages(request):
     inbox = Messages.objects.filter(receiver=user).order_by('-timestamp')
     outbox = Messages.objects.filter(sender=user).order_by('-timestamp')
 
-    # test = Messages.objects.filter(reciever=user).order_by('-timestamp').distinct('reciever_id')
-    # print(test)
+    print(f"🔥🔥🔥 {inbox[0].receiver}")
 
     context = {'inbox': inbox, 'outbox': outbox, 'time_now': time_now}
 
