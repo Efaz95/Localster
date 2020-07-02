@@ -2,33 +2,35 @@
 
 {% block content %}
 
-
-    {#<form action="" method="POST">#}
-    {#    {% csrf_token %}#}
-    {#    <label>Send to:</label>#}
-    {#    <input type="text" name="msg_receiver" value="{{ picked_user }}">#}
-    {#    <br>#}
-    {#    <br>#}
-    {#    <label>Message:</label>#}
-    {#    <textarea name="msg_content" rows="4" cols="50"></textarea>#}
-    {#    <br>#}
-    {#    <br>#}
-    {#    <input type="submit" value="Submit">#}
-    {#</form>#}
-
-
     <div class="message_box">
-        <h6>Inbox</h6>
-        {% for message in inbox %}
-            <ul>
-                <li title="{{ message.sender.username }}">{{ message.sender.first_name }}: {{ message.msg_content }}
-                    <button onclick="myFunction()">Reply</button>
-                </li>
-                <small>-{{ message.timestamp }}</small>
-                <hr>
-            </ul>
-        {% endfor %}
 
+        <div id="inbox">
+            <h6>Inbox</h6>
+            {% for message in inbox %}
+                <ul>
+                    <li title="{{ message.sender.username }}">{{ message.sender.first_name }}: {{ message.msg_content }}
+                        {% if message.is_read == False %}
+                            <form action="{% url 'messages' %}" method="POST">
+                            {% csrf_token %}
+                            <button value="{{ message.id }}" name="read">mark as read</button>
+                            </form>
+                        {% endif %}
+                        {% if message.is_read == True %}
+                            <button onclick="myFunction()">Reply</button>
+                        {% endif %}
+                    </li>
+                    <small>-{{ message.timestamp }}</small>
+                    <hr>
+                </ul>
+            {% endfor %}
+
+        </div>
+
+
+        <span>last synced- {{ time_now.time }}</span>
+        <input type="button" value="sync now" onClick="window.location.href = window.location.href;">
+        <br>
+        <br>
 
         <div id="msg" style="display: none">
             <form action="{% url 'messages' %}" method="POST">
@@ -46,9 +48,6 @@
             </form>
         </div>
 
-        <span>last synced- {{ time_now.time }}</span>
-
-        <input type="button" value="sync now" onClick="window.location.href = window.location.href;">
         <hr>
         <h6>Outbox</h6>
 
@@ -61,7 +60,6 @@
         {% endfor %}
 
     </div>
-
 
 
     <script>

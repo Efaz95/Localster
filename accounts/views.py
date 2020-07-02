@@ -68,7 +68,6 @@ def logout_user(request):
 def home(request):
     user = request.user
 
-    picked_user = None
     searched_inf = None
     if request.method == "POST":
         if 'hired_influencer' in request.POST:
@@ -82,8 +81,6 @@ def home(request):
         else:
             user_zip = user.businessprofile.zip_code
             searched_inf = InfluencerProfile.objects.filter(zip_code=user_zip)
-            # global picked_user
-            # picked_user = searched_inf.user.username
 
     hired_by_this_business = Hire.objects.filter(hired_by=request.user.id)
     working_with = Hire.objects.filter(hired_influencer=request.user.id)
@@ -132,12 +129,18 @@ def user_messages(request):
     user = request.user
 
     if request.method == "POST":
-        sender = request.user
-        receiver_name = request.POST.get('msg_receiver')
-        receiver = User.objects.get(username=receiver_name)
-        msg_content = request.POST.get('msg_content')
+        if 'read' in request.POST:
+            un = request.POST.get('read')
+            Messages.objects.filter(id=un).update(is_read=True)
 
-        Messages.objects.create(sender=sender, receiver=receiver, msg_content=msg_content)
+
+        else:
+            sender = request.user
+            receiver_name = request.POST.get('msg_receiver')
+            receiver = User.objects.get(username=receiver_name)
+            msg_content = request.POST.get('msg_content')
+
+            Messages.objects.create(sender=sender, receiver=receiver, msg_content=msg_content)
 
     inbox = Messages.objects.filter(receiver=user).order_by('-timestamp')
     outbox = Messages.objects.filter(sender=user).order_by('-timestamp')
