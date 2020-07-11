@@ -131,34 +131,6 @@ def user_messages(request):
         if 'read' in request.POST:
             un = request.POST.get('read')
             Messages.objects.filter(id=un).update(is_read=True)
-            return redirect('inbox')
-
-        else:
-            sender = request.user
-            receiver_name = request.POST.get('msg_receiver')
-            receiver = User.objects.get(username=receiver_name)
-            msg_content = request.POST.get('msg_content')
-
-            Messages.objects.create(sender=sender, receiver=receiver, msg_content=msg_content)
-
-            return redirect('inbox')
-
-    inbox = Messages.objects.filter(receiver=user).order_by('-timestamp')
-    # outbox = (Messages.objects.filter(sender=user).order_by('-timestamp')
-
-    serialized_inbox = serializers.serialize('json', inbox)
-
-    return HttpResponse(serialized_inbox, content_type='application/json')
-
-
-def view_inbox(request):
-    time_now = datetime.datetime.now()
-    user = request.user
-
-    if request.method == "POST":
-        if 'read' in request.POST:
-            un = request.POST.get('read')
-            Messages.objects.filter(id=un).update(is_read=True)
 
         else:
             sender = request.user
@@ -174,3 +146,16 @@ def view_inbox(request):
     context = {'inbox': inbox, 'outbox': outbox, 'time_now': time_now}
 
     return render(request, 'accounts/messages.html', context)
+
+
+@login_required(login_url='login')
+def msgs_json(request):
+    time_now = datetime.datetime.now()
+    user = request.user
+
+    inbox = Messages.objects.filter(receiver=user).order_by('-timestamp')
+    # outbox = (Messages.objects.filter(sender=user).order_by('-timestamp')
+
+    serialized_inbox = serializers.serialize('json', inbox)
+
+    return HttpResponse(serialized_inbox, content_type='application/json')

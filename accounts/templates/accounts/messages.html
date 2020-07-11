@@ -75,7 +75,7 @@
 
         function load_messages(){
             $.ajax({
-                url: '{% url 'messages' %}',
+                url: '{% url 'msgs_json' %}',
                 datatype: 'json',
                 type: 'GET',
                 success: function(body) {
