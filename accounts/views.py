@@ -145,11 +145,8 @@ def user_messages(request):
     inbox = Messages.objects.filter(receiver=user).order_by('-timestamp')
     outbox = Messages.objects.filter(sender=user).order_by('-timestamp')
 
+    print(type(inbox))
+
     context = {'inbox': inbox, 'outbox': outbox, 'time_now': time_now}
 
     return render(request, 'accounts/messages.html', context)
-
-# def hire(request):
-#     hired_by = request.user
-#     hired_influencer = request.POST.get('')
-#     Hire.objects.create(hired_by=hired_by, hired_influencer=hired_influencer)

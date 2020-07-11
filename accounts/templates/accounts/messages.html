@@ -8,29 +8,27 @@
             <h6>Inbox</h6>
             {% for message in inbox %}
                 <ul>
-                    <li title="{{ message.sender.username }}">{{ message.sender.first_name }}: {{ message.msg_content }}
+                    <li title="{{ message.sender.username }}">
+                        {{ message.sender.first_name }}: {{ message.msg_content }}
                         {% if message.is_read == False %}
                             <form action="{% url 'messages' %}" method="POST">
-                            {% csrf_token %}
-                            <button value="{{ message.id }}" name="read">mark as read</button>
+                                {% csrf_token %}
+                                <button value="{{ message.id }}" name="read">mark as read</button>
                             </form>
                         {% endif %}
                         {% if message.is_read == True %}
-                            <button onclick="myFunction()">Reply</button>
+                            <button onclick="reply()">Reply</button>
                         {% endif %}
                     </li>
                     <small>-{{ message.timestamp }}</small>
                     <hr>
                 </ul>
             {% endfor %}
-
         </div>
-
 
         <span>last synced- {{ time_now.time }}</span>
         <input type="button" value="sync now" onClick="window.location.href = window.location.href;">
-        <br>
-        <br>
+        <br><br>
 
         <div id="msg" style="display: none">
             <form action="{% url 'messages' %}" method="POST">
@@ -49,21 +47,23 @@
         </div>
 
         <hr>
-        <h6>Outbox</h6>
 
-        {% for message in outbox %}
-            <ul>
-                <li>{{ message.receiver.first_name }}: {{ message.msg_content }}</li>
-                <small>-{{ message.timestamp }}</small>
-                <hr>
-            </ul>
-        {% endfor %}
+        <div id="outbox">
+            <h6>Outbox</h6>
+            {% for message in outbox %}
+                <ul>
+                    <li>{{ message.receiver.first_name }}: {{ message.msg_content }}</li>
+                    <small>-{{ message.timestamp }}</small>
+                    <hr>
+                </ul>
+            {% endfor %}
+        </div>
 
     </div>
 
 
     <script>
-        function myFunction() {
+        function reply() {
             var x = document.getElementById("msg");
             if (x.style.display === "none") {
                 x.style.display = "block";
@@ -71,6 +71,10 @@
                 x.style.display = "none";
             }
         }
+
+
+
+
     </script>
 
 {% endblock %}
