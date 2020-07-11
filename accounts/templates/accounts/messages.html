@@ -61,6 +61,7 @@
 
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <script>
         function reply() {
@@ -72,8 +73,23 @@
             }
         }
 
+        function load_messages(){
+            $.ajax({
+                url: '{% url 'messages' %}',
+                datatype: 'json',
+                type: 'GET',
+                success: function(body) {
+                    body.forEach(function() {
+                      $("#inbox").load(location.href + " #inbox");
+                      $("#outbox").load(location.href + " #outbox");
+                    });
+                }
+            });
+        }
 
-
+        $(document).ready(function(){
+         setInterval(load_messages,500);
+        });
 
     </script>
 
