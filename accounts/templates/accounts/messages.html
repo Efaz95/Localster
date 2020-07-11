@@ -79,9 +79,14 @@
                 datatype: 'json',
                 type: 'GET',
                 success: function(body) {
-                    body.forEach(function() {
-                      $("#inbox").load(location.href + " #inbox");
-                      $("#outbox").load(location.href + " #outbox");
+                    body.forEach(function(b) {
+
+                        if (b.fields.is_read === false){
+                            console.log("unread message(s)")
+                            $("#inbox").load(location.href + " #inbox");
+                            $("#outbox").load(location.href + " #outbox");
+                        }
+
                     });
                 }
             });
