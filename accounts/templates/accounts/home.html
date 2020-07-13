@@ -12,8 +12,8 @@
                               target="_blank">{{ user.influencerprofile.ig_link }}</a></p>
         <p>Followers: {{ user.influencerprofile.followers }}</p>
         <p>Member since: {{ user.date_joined }}</p>
-        <button><a href="{% url 'settings' user.username %}">Update info</a></button>
-        <button><a href="{% url 'messages' %}">Check messages</a></button>
+        <button class="btn btn-sm"><a href="{% url 'settings' user.username %}">Update info</a></button>
+        <button class="btn btn-sm"><a href="{% url 'messages' %}">Check messages</a></button>
         <br>
         <hr>
         <h5>You are currently working with:</h5>
@@ -40,7 +40,7 @@
             {#            <label for="infsearch">Search Influencers</label>#}
             {#            <input type="search" id="infsearch" name="infsearch">#}
             {#            <input type="submit" value="search">#}
-            <input type="submit" value="Search Influencer in your local Area Now!">
+            <input type="submit" value="Search Influencer in your local Area Now!" class="btn">
         </form>
 
 
@@ -51,7 +51,7 @@
                 {% csrf_token %}
                 <li>
                     {{ i.hired_influencer.first_name }} {{ i.hired_influencer.last_name }}
-                    <button onclick="clicked(event)" value="{{ i.id }}" name="unhired_id">Done Working?</button>
+                    <button onclick="clicked(event)" value="{{ i.id }}" name="unhired_id" class="btn btn-sm">Done Working?</button>
                 </li>
                 </form>
             {% endfor %}
@@ -66,8 +66,8 @@
                     {% csrf_token %}
                     <p>Result: <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">IG link
                         for {{ i.user.first_name }} {{ i.user.last_name }}</a>
-                        <input type="button" onclick="myFunction()" value="Message">
-                        <button value="{{ i.user }}" name="hired_influencer" onclick="clicked(event)">Hire</button>
+                        <input type="button" onclick="myFunction()" value="Message" class="btn btn-sm">
+                        <button value="{{ i.user }}" name="hired_influencer" onclick="clicked(event)" class="btn btn-sm">Hire</button>
                     </p>
                 </form>
             </div>

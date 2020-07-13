@@ -2,14 +2,14 @@
 
 {% block content %}
 
+    <br>
     <div class="message_box card-deck">
-
-        <div class="card" id="inbox" style="width: 500px; height: 400px; overflow: auto">
-            <h6>Inbox</h6>
+        <div class="card card border-info mb-3 text-white bg-dark mb-3" id="inbox" style="width: 500px; height: 400px; overflow: auto">
+            <div class="card-header">Inbox</div>
             {% for message in inbox %}
                 <ul>
                     <li title="{{ message.sender.username }}">
-                        {{ message.sender.first_name }}: {{ message.msg_content }}
+                        <strong>{{ message.sender.first_name }}</strong>: {{ message.msg_content }}
                         {% if message.is_read == False %}
                             <form action="{% url 'messages' %}" method="POST">
                                 {% csrf_token %}
@@ -17,7 +17,7 @@
                             </form>
                         {% endif %}
                         {% if message.is_read == True %}
-                            <button onclick="reply()">Reply</button>
+                            <button onclick="reply()" class="btn btn-sm">Reply</button>
                         {% endif %}
                     </li>
                     <small>-{{ message.timestamp }}</small>
@@ -45,11 +45,11 @@
 
         <hr>
 
-        <div class="card" id="outbox" style="width: 500px; height: 400px; overflow: auto">
-            <h6>Outbox</h6>
+        <div class="card card border-info mb-3 text-white bg-dark mb-3" id="outbox" style="width: 500px; height: 400px; overflow: auto">
+            <div class="card-header">Outbox</div>
             {% for message in outbox %}
                 <ul>
-                    <li>{{ message.receiver.first_name }}: {{ message.msg_content }}</li>
+                    <strong><li>{{ message.receiver.first_name }}</strong>: {{ message.msg_content }}</li>
                     <small>-{{ message.timestamp }}</small>
                     <hr>
                 </ul>
@@ -61,7 +61,7 @@
     <br>
     <div>
         <small>last synced- {{ time_now.time }}</small>
-        <input type="button" value="sync now" onClick="window.location.href = window.location.href;">
+        <input type="button" value="sync now" onClick="window.location.href = window.location.href;" class="btn btn-sm">
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

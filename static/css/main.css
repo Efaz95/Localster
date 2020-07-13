@@ -1,6 +1,6 @@
 
 body {
-    background-color: #e9e4d3;
+    background-color: #d3d7db;
 }
 
 #footer {
@@ -14,17 +14,32 @@ body {
     opacity: 0.5;
 }
 
-.message_box{
-    border: 2px solid black;
-    padding: 5px;
-}
+/*.message_box{*/
+/*    border: 2px solid black;*/
+/*    padding: 5px;*/
+/*}*/
 
 .footer {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #dbd2b7;
-    color: black;
+    background-color: #343a40;
+    color: #d3d7db;
     text-align: center;
+}
+
+.btn{
+    background-color: #de8466;
+    border-color: #de8466;
+}
+
+.btn:hover{
+    background-color: #de8466;
+    border-color: black;
+}
+
+
+a{
+    color: black;
 }
