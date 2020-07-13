@@ -131,7 +131,6 @@ def user_messages(request):
         if 'read' in request.POST:
             un = request.POST.get('read')
             Messages.objects.filter(id=un).update(is_read=True)
-
         else:
             sender = request.user
             receiver_name = request.POST.get('msg_receiver')
@@ -154,8 +153,6 @@ def msgs_json(request):
     user = request.user
 
     inbox = Messages.objects.filter(receiver=user).order_by('-timestamp')
-    # outbox = (Messages.objects.filter(sender=user).order_by('-timestamp')
-
     serialized_inbox = serializers.serialize('json', inbox)
 
     return HttpResponse(serialized_inbox, content_type='application/json')

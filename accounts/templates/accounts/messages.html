@@ -2,9 +2,9 @@
 
 {% block content %}
 
-    <div class="message_box">
+    <div class="message_box card-deck">
 
-        <div id="inbox">
+        <div class="card" id="inbox" style="width: 500px; height: 400px; overflow: auto">
             <h6>Inbox</h6>
             {% for message in inbox %}
                 <ul>
@@ -26,9 +26,6 @@
             {% endfor %}
         </div>
 
-        <span>last synced- {{ time_now.time }}</span>
-        <input type="button" value="sync now" onClick="window.location.href = window.location.href;">
-        <br><br>
 
         <div id="msg" style="display: none">
             <form action="{% url 'messages' %}" method="POST">
@@ -39,7 +36,7 @@
                 <br>
                 <br>
                 <label>Message:</label>
-                <textarea name="msg_content" rows="4" cols="50"></textarea>
+                <textarea name="msg_content" rows="4" cols="40"></textarea>
                 <br>
                 <br>
                 <input type="submit" value="Submit">
@@ -48,7 +45,7 @@
 
         <hr>
 
-        <div id="outbox">
+        <div class="card" id="outbox" style="width: 500px; height: 400px; overflow: auto">
             <h6>Outbox</h6>
             {% for message in outbox %}
                 <ul>
@@ -59,6 +56,12 @@
             {% endfor %}
         </div>
 
+    </div>
+
+    <br>
+    <div>
+        <small>last synced- {{ time_now.time }}</small>
+        <input type="button" value="sync now" onClick="window.location.href = window.location.href;">
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -73,27 +76,25 @@
             }
         }
 
-        function load_messages(){
+        function load_messages() {
             $.ajax({
                 url: '{% url 'msgs_json' %}',
                 datatype: 'json',
                 type: 'GET',
-                success: function(body) {
-                    body.forEach(function(b) {
-
-                        if (b.fields.is_read === false){
+                success: function (body) {
+                    body.forEach(function (b) {
+                        if (b.fields.is_read === false) {
                             console.log("unread message(s)")
                             $("#inbox").load(location.href + " #inbox");
                             $("#outbox").load(location.href + " #outbox");
                         }
-
                     });
                 }
             });
         }
 
-        $(document).ready(function(){
-         setInterval(load_messages,500);
+        $(document).ready(function () {
+            setInterval(load_messages, 500);
         });
 
     </script>
