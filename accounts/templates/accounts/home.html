@@ -37,9 +37,6 @@
 
         <form action="" method="POST">
             {% csrf_token %}
-            {#            <label for="infsearch">Search Influencers</label>#}
-            {#            <input type="search" id="infsearch" name="infsearch">#}
-            {#            <input type="submit" value="search">#}
             <input type="submit" value="Search Influencer in your local Area Now!" class="btn">
         </form>
 
@@ -48,12 +45,15 @@
         <ul>
             {% for i in hired_by_this_business %}
                 <form action="" method="POST">
-                {% csrf_token %}
-                <li>
-                    {{ i.hired_influencer.first_name }} {{ i.hired_influencer.last_name }}
-                    <button onclick="clicked(event)" value="{{ i.id }}" name="unhired_id" class="btn btn-sm">Done Working?</button>
-                </li>
+                    {% csrf_token %}
+                    <li>
+                        {{ i.hired_influencer.first_name }} {{ i.hired_influencer.last_name }}
+                        <button onclick="clicked(event)" value="{{ i.id }}" name="unhired_id" class="btn btn-sm">Done
+                            Working?
+                        </button>
+                    </li>
                 </form>
+                <hr>
             {% endfor %}
         </ul>
 
@@ -64,11 +64,20 @@
             <div>
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <p>Result: <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">IG link
-                        for {{ i.user.first_name }} {{ i.user.last_name }}</a>
-                        <input type="button" onclick="myFunction()" value="Message" class="btn btn-sm">
-                        <button value="{{ i.user }}" name="hired_influencer" onclick="clicked(event)" class="btn btn-sm">Hire</button>
-                    </p>
+                    <table class="table table-striped table-sm" >
+                        <tr>
+                            <td class="align-middle" style="width: 25%">{{ i.user.first_name }} {{ i.user.last_name }}</td>
+                            <td class="align-middle" style="width: 25%">{{ i.user.influencerprofile.followers }} followers</td>
+                            <td class="align-middle" style="width: 25%">
+                                <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">ig handle</a>
+                            </td>
+                            <td class="align-middle" style="width: 11%"><input type="button" onclick="myFunction()" value="Message" class="btn btn-sm">
+                                <button value="{{ i.user }}" name="hired_influencer" onclick="clicked(event)"
+                                        class="btn btn-sm">Hire
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
                 </form>
             </div>
         {% endfor %}
@@ -87,7 +96,6 @@
                 <input type="submit" value="Submit">
             </form>
         </div>
-
     {% endif %}
 
 
