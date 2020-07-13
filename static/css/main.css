@@ -3,12 +3,6 @@ body {
     background-color: #d3d7db;
 }
 
-#footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
 
 .text-muted {
     opacity: 0.5;
@@ -42,4 +36,8 @@ body {
 
 a{
     color: black;
+}
+
+.sync:hover{
+    font-size:19px;
 }

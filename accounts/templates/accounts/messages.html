@@ -3,7 +3,7 @@
 {% block content %}
 
     <br>
-    <div class="message_box card-deck">
+    <div class="card-deck">
         <div class="card card border-info mb-3 text-white bg-dark mb-3" id="inbox" style="width: 500px; height: 400px; overflow: auto">
             <div class="card-header">Inbox</div>
             {% for message in inbox %}
@@ -63,7 +63,8 @@
     <br>
     <div>
         <small>last synced- {{ time_now.time }}</small>
-        <input type="button" value="sync now" onClick="window.location.href = window.location.href;" class="btn btn-sm">
+{#        <input type="button" value="sync now" onClick="window.location.href = window.location.href;" class="btn btn-sm">#}
+        <i class="sync fas fa-sync-alt" onClick="window.location.href = window.location.href;"></i>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

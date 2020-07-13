@@ -69,19 +69,19 @@
                             <td class="align-middle" style="width: 25%">{{ i.user.first_name }} {{ i.user.last_name }}</td>
                             <td class="align-middle" style="width: 25%">{{ i.user.influencerprofile.followers }} followers</td>
                             <td class="align-middle" style="width: 25%">
-                                <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">
+                                <a href="{{ i.ig_link }}" target="_blank" title="instagram">
                                     <i class="fab fa-instagram" style="font-size:30px;"></i>
                                 </a>
                                 <span> ,</span>
-                                <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">
+                                <a href="{{ i.ig_link }}" target="_blank" title="twitter">
                                     <i class="fab fa-twitter" style="font-size:30px;"></i>
                                 </a>
                                 <span> ,</span>
-                                <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">
+                                <a href="{{ i.ig_link }}" target="_blank" title="facebook">
                                     <i class="fab fa-facebook" style="font-size:30px;"></i>
                                 </a>
                             </td>
-                            <td class="align-middle" style="width: 10.34%"><input type="button" onclick="myFunction()" value="Message" class="btn btn-sm">
+                            <td class="align-middle" style="width: 10.34%"><input type="button" onclick="reply()" value="Message" class="btn btn-sm">
                                 <button value="{{ i.user }}" name="hired_influencer" onclick="clicked(event)"
                                         class="btn btn-sm">Hire
                                 </button>
@@ -107,7 +107,7 @@
                 <br><br>
 
                 <input type="submit" value="Submit">
-                <input type="button" onclick="reply()" value="cancel">
+                <input type="button" value="cancel" onclick="reply()">
 
                 <br><br>
             </form>
@@ -116,7 +116,7 @@
 
 
     <script>
-        function myFunction() {
+        function reply() {
             var x = document.getElementById("msg");
             if (x.style.display === "none") {
                 x.style.display = "block";
