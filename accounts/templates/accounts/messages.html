@@ -8,12 +8,12 @@
             <div class="card-header">Inbox</div>
             {% for message in inbox %}
                 <ul>
-                    <li title="{{ message.sender.username }}">
-                        <strong>{{ message.sender.first_name }}</strong>: {{ message.msg_content }}
+                    <li>
+                        <strong>{{ message.sender.first_name }}</strong>: <span data-toggle="tooltip" data-placement="bottom" title="{{ message.sender.username }}">{{ message.msg_content }}</span>
                         {% if message.is_read == False %}
                             <form action="{% url 'messages' %}" method="POST">
                                 {% csrf_token %}
-                                <button value="{{ message.id }}" name="read">mark as read</button>
+                                <button value="{{ message.id }}" name="read" class="btn btn-sm">mark as read❗️</button>
                             </form>
                         {% endif %}
                         {% if message.is_read == True %}
@@ -39,8 +39,10 @@
                 <textarea name="msg_content" rows="4" cols="40"></textarea>
                 <br>
                 <br>
-                <input type="submit" value="Submit">
+                <input type="submit" value="send">
+                <input type="button" value="cancel" onclick="reply()">
             </form>
+
         </div>
 
         <hr>
@@ -67,6 +69,11 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <script>
+
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
         function reply() {
             var x = document.getElementById("msg");
             if (x.style.display === "none") {
@@ -86,7 +93,7 @@
                         if (b.fields.is_read === false) {
                             console.log("unread message(s)")
                             $("#inbox").load(location.href + " #inbox");
-                            $("#outbox").load(location.href + " #outbox");
+                            /*$("#outbox").load(location.href + " #outbox");*/
                         }
                     });
                 }

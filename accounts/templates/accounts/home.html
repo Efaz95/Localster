@@ -69,9 +69,19 @@
                             <td class="align-middle" style="width: 25%">{{ i.user.first_name }} {{ i.user.last_name }}</td>
                             <td class="align-middle" style="width: 25%">{{ i.user.influencerprofile.followers }} followers</td>
                             <td class="align-middle" style="width: 25%">
-                                <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">ig handle</a>
+                                <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">
+                                    <i class="fab fa-instagram" style="font-size:30px;"></i>
+                                </a>
+                                <span> ,</span>
+                                <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">
+                                    <i class="fab fa-twitter" style="font-size:30px;"></i>
+                                </a>
+                                <span> ,</span>
+                                <a href="{{ i.ig_link }}" target="_blank" title="{{ i.user.username }}">
+                                    <i class="fab fa-facebook" style="font-size:30px;"></i>
+                                </a>
                             </td>
-                            <td class="align-middle" style="width: 11%"><input type="button" onclick="myFunction()" value="Message" class="btn btn-sm">
+                            <td class="align-middle" style="width: 10.34%"><input type="button" onclick="myFunction()" value="Message" class="btn btn-sm">
                                 <button value="{{ i.user }}" name="hired_influencer" onclick="clicked(event)"
                                         class="btn btn-sm">Hire
                                 </button>
@@ -81,19 +91,25 @@
                 </form>
             </div>
         {% endfor %}
+        <br><br>
 
         <div id="msg" style="display: none">
             <form action="{% url 'messages' %}" method="POST">
                 {% csrf_token %}
                 <label>Send to:</label>
                 <input type="text" name="msg_receiver" size="40px" placeholder="hover over ig link to see the username">
-                <br>
-                <br>
+
+                <br><br>
+
                 <label>Message:</label>
                 <textarea name="msg_content" rows="4" cols="50"></textarea>
-                <br>
-                <br>
+
+                <br><br>
+
                 <input type="submit" value="Submit">
+                <input type="button" onclick="reply()" value="cancel">
+
+                <br><br>
             </form>
         </div>
     {% endif %}
