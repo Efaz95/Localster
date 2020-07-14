@@ -17,7 +17,7 @@
                             </form>
                         {% endif %}
                         {% if message.is_read == True %}
-                            <button onclick="reply()" class="btn btn-sm">Reply</button>
+                            <i id="reply" class="fas fa-reply" onclick="reply()" title="reply"></i>
                         {% endif %}
                     </li>
                     <small>-{{ message.timestamp }}</small>

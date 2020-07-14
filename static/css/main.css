@@ -41,3 +41,21 @@ a{
 .sync:hover{
     font-size:19px;
 }
+
+#reply{
+    color: #de8466;
+}
+
+#reply:hover{
+    font-size: 19px;
+}
+
+.jumbotron{
+    background-color: #d3d7db !important;
+}
+
+#bio{
+    font-family: 'Indie Flower', cursive;
+    font-size: 24px;
+    font-weight: bold;
+}
