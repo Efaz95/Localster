@@ -32,11 +32,11 @@
                 {% csrf_token %}
                 <label>Send to:</label>
                 <input type="text" name="msg_receiver" size="40px"
-                       placeholder="hover over message to see the username">
+                       placeholder="hover over message to see the username" required>
                 <br>
                 <br>
                 <label>Message:</label>
-                <textarea name="msg_content" rows="4" cols="40"></textarea>
+                <textarea name="msg_content" rows="4" cols="40" required></textarea>
                 <br>
                 <br>
                 <input type="submit" value="send">
