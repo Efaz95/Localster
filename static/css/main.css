@@ -59,3 +59,8 @@ a{
     font-size: 24px;
     font-weight: bold;
 }
+
+h1, h2, h5, p, span, li{
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 500;
+}

@@ -4,14 +4,14 @@
 
 
     {% if user.groups.all.0.name == "influencer" %}
-        <p>Hey, {{ user.first_name }} {{ user.last_name }}</p>
-        <p>Username: {{ user.username }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>Bio: {{ user.influencerprofile.bio }}</p>
-        <p>Instagram Link: <a href="{{ user.influencerprofile.ig_link }}"
-                              target="_blank">{{ user.influencerprofile.ig_link }}</a></p>
-        <p>Followers: {{ user.influencerprofile.followers }}</p>
-        <p>Member since: {{ user.date_joined }}</p>
+        <h2>Hey, {{ user.first_name }} {{ user.last_name }}</h2>
+        <p> {{ user.influencerprofile.city }}, {{ user.influencerprofile.state }}</p>
+         You described yourself as: <div id="bio">- {{ user.influencerprofile.bio }}</div><br>
+         You can be found at: <span><a href="{{ user.influencerprofile.ig_link }}" target="_blank"><i class="fab fa-instagram" style="font-size:30px;"></i></a></span>
+        <span><a href="{{ user.influencerprofile.ig_link }}" target="_blank"><i class="fab fa-twitter" style="font-size:30px;"></i></a></span>
+        <span><a href="{{ user.influencerprofile.ig_link }}" target="_blank"><i class="fab fa-facebook" style="font-size:30px;"></i></a></span>
+        <p> -followers: {{ user.influencerprofile.followers }} 🔥</p>
+        <p>Member since: {{ user.date_joined|date:"F d, Y"}}</p>
         <button class="btn btn-sm"><a href="{% url 'settings' user.username %}">Update info</a></button>
         <button class="btn btn-sm"><a href="{% url 'messages' %}">Check messages</a></button>
         <br>
@@ -80,9 +80,10 @@
                                     <i class="fab fa-facebook" style="font-size:30px;"></i>
                                 </a>
                             </td>
-                            <td class="align-middle" style="width: 10%"><input type="button" onclick="reply()" value="Message" class="btn btn-sm">
-                                <button value="{{ i.user }}" name="hired_influencer" onclick="clicked(event)"
-                                        class="btn btn-sm">Hire
+                            <td class="align-middle" style="width: 10%">
+                                <input class="btn btn-sm" type="button" onclick="reply()" value="Message">
+                                <button value="{{ i.user }}" name="hired_influencer"
+                                        class="btn btn-sm" onclick="clicked(event)">Hire
                                 </button>
                             </td>
                         </tr>

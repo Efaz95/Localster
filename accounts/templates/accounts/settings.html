@@ -1,21 +1,22 @@
 {% extends 'accounts/main.html' %}
 
 {% block content %}
+    <br>
+    <div class="container border rounded border-dark">
+        {% if user.groups.all.0.name == "influencer" %}
+            <p>{{ influencer.user.first_name }} {{ influencer.user.last_name }}</p>
+        {% endif %}
+        {% if user.groups.all.0.name == "business" %}
+            <p>{{ business.user.first_name }} {{ business.user.last_name }}</p>
+        {% endif %}
 
-{% if user.groups.all.0.name == "influencer" %}
-    <p>Welcome, {{ influencer.user.first_name }} {{ influencer.user.last_name }}</p>
-{% endif %}
-{% if user.groups.all.0.name == "business" %}
-    <p>Welcome, {{ business.user.first_name }} {{ business.user.last_name }}</p>
-{% endif %}
 
-
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update">
-</form>
-
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update">
+        </form>
+    </div>
 
 
 {% endblock %}
