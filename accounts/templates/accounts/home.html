@@ -93,16 +93,17 @@
         {% endfor %}
         <br><br>
 
-        <div id="msg" style="display: none">
+        <div id="msg" style="display: none" class="container border rounded border-dark">
+            <br>
             <form action="{% url 'messages' %}" method="POST">
                 {% csrf_token %}
                 <label>Send to:</label>
-                <input type="text" name="msg_receiver" size="40px" placeholder="hover over ig link to see the username">
+                <input type="text" name="msg_receiver" size="40px" placeholder="hover over ig link to see the username" required>
 
                 <br><br>
 
                 <label>Message:</label>
-                <textarea name="msg_content" rows="4" cols="50"></textarea>
+                <textarea name="msg_content" rows="4" cols="50" required></textarea>
 
                 <br><br>
 
@@ -111,7 +112,10 @@
 
                 <br><br>
             </form>
+
         </div>
+        <br><br>
+
     {% endif %}
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
