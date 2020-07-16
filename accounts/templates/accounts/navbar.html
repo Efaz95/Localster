@@ -23,8 +23,32 @@
     </div>
 
     <span><a class="hello-msg" href="{% url 'home' %}">Home</a></span>
-    <span><a class="hello-msg" href="{% url 'messages' %}">Messages</a></span>
+    <span><a id="msg1" class="hello-msg" href="{% url 'messages' %}">Messages</a></span>
     <span><a class="hello-msg" href="{% url 'settings' user.username %}">Settings</a></span>
     <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
 
 </nav>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    function load_messages() {
+            $.ajax({
+                url: '{% url 'msgs_json' %}',
+                datatype: 'json',
+                type: 'GET',
+                success: function (body) {
+                    body.forEach(function (b) {
+                        if (b.fields.is_read === false) {
+                            console.log("unread message(s)")
+                            document.getElementById("msg1").innerHTML = "Messages❗️";
+                        }
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            setInterval(load_messages, 500);
+        });
+</script>
