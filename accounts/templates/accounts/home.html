@@ -7,9 +7,10 @@
         <h2>Hey, {{ user.first_name }} {{ user.last_name }}</h2>
         <p> {{ user.influencerprofile.city }}, {{ user.influencerprofile.state }}</p>
          You described yourself as: <div id="bio">- {{ user.influencerprofile.bio }}</div><br>
-         You can be found at: <span><a href="{{ user.influencerprofile.ig_link }}" target="_blank"><i class="fab fa-instagram" style="font-size:30px;"></i></a></span>
-        <span><a href="{{ user.influencerprofile.ig_link }}" target="_blank"><i class="fab fa-twitter" style="font-size:30px;"></i></a></span>
-        <span><a href="{{ user.influencerprofile.ig_link }}" target="_blank"><i class="fab fa-facebook" style="font-size:30px;"></i></a></span>
+         You can be found at:
+        <span><a id="icons" href="{{ user.influencerprofile.ig_link }}" target="_blank"><i class="fab fa-instagram" style="font-size:30px;"></i></a></span>
+        <span><a id="icons" href="{{ user.influencerprofile.ig_link }}" target="_blank"><i class="fab fa-twitter" style="font-size:30px;"></i></a></span>
+        <span><a id="icons" href="{{ user.influencerprofile.ig_link }}" target="_blank"><i class="fab fa-facebook" style="font-size:30px;"></i></a></span>
         <p> -followers: {{ user.influencerprofile.followers }} 🔥</p>
         <p>Member since: {{ user.date_joined|date:"F d, Y"}}</p>
         <button class="btn btn-sm"><a href="{% url 'settings' user.username %}">Update info</a></button>
@@ -68,15 +69,15 @@
                             <td id="bio" class="align-middle" style="width: 30%">{{ i.user.influencerprofile.bio }}</td>
                             <td class="align-middle" style="width: 10%">{{ i.user.influencerprofile.followers }} followers</td>
                             <td class="align-middle" style="width: 10%">
-                                <a href="{{ i.ig_link }}" target="_blank" title="instagram">
+                                <a id="icons" href="{{ i.ig_link }}" target="_blank" title="instagram">
                                     <i class="fab fa-instagram" style="font-size:30px;"></i>
                                 </a>
                                 <span> ,</span>
-                                <a href="{{ i.ig_link }}" target="_blank" title="twitter">
+                                <a id="icons" href="{{ i.ig_link }}" target="_blank" title="twitter">
                                     <i class="fab fa-twitter" style="font-size:30px;"></i>
                                 </a>
                                 <span> ,</span>
-                                <a href="{{ i.ig_link }}" target="_blank" title="facebook">
+                                <a id="icons" href="{{ i.ig_link }}" target="_blank" title="facebook">
                                     <i class="fab fa-facebook" style="font-size:30px;"></i>
                                 </a>
                             </td>

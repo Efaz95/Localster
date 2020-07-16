@@ -40,7 +40,6 @@
                 success: function (body) {
                     body.forEach(function (b) {
                         if (b.fields.is_read === false) {
-                            console.log("unread message(s)")
                             document.getElementById("msg1").innerHTML = "Messages❗️";
                             document.getElementById('msg1').setAttribute('title', "You have new messages!");
                         }

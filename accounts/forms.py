@@ -16,6 +16,9 @@ class UpdateInfProfileForm(ModelForm):
     class Meta:
         model = InfluencerProfile
         fields = ['bio', 'ig_link', 'followers', 'city', 'state', 'zip_code']
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+        }
 
 
 class UpdateBisProfileForm(ModelForm):
