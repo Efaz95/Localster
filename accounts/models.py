@@ -38,3 +38,4 @@ class Messages(models.Model):
 class Hire(models.Model):
     hired_by = models.ForeignKey(User, related_name="business", on_delete=models.CASCADE)
     hired_influencer = models.ForeignKey(User, related_name="influencer", on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True, null=True)

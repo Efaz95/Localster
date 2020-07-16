@@ -19,7 +19,7 @@
         <h5>You are currently working with:</h5>
         <ul>
             {% for i in working_with %}
-                <li>{{ i.hired_by.businessprofile.business_name }}</li>
+                <li>{{ i.hired_by.businessprofile.business_name }} - <em>since {{ i.timestamp|date:"F d, Y" }}</em></li>
             {% endfor %}
         </ul>
 
@@ -42,9 +42,9 @@
                 <form action="" method="POST">
                     {% csrf_token %}
                     <li>
-                        {{ i.hired_influencer.first_name }} {{ i.hired_influencer.last_name }}
-                        <button onclick="clicked(event)" value="{{ i.id }}" name="unhired_id" class="btn btn-sm">Done
-                            Working?
+                        {{ i.hired_influencer.first_name }} {{ i.hired_influencer.last_name }} - <em>since {{ i.timestamp|date:"F d, Y" }}</em>
+                        <button onclick="clicked(event)" value="{{ i.id }}" name="unhired_id" class="btn btn-sm">
+                            Done Working?
                         </button>
                     </li>
                 </form>
