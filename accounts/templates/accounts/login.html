@@ -80,14 +80,28 @@
             padding: 10px;
             margin-top: 10px;
         }
+
     </style>
 
 </head>
 <body>
 
 
+{#<nav class="navbar navbar-expand-lg" style="background-color: #343a40;">#}
+{#    <a href="{% url 'login' %}"><img src="{% static 'images/logo2.png' %}" height="25" width="200"></a>#}
+{#    <span><a class="text-right" href="{% url 'logout' %}">About</a></span>#}
+{#</nav>#}
+
+
 <nav class="navbar navbar-expand-lg" style="background-color: #343a40;">
     <a href="{% url 'login' %}"><img src="{% static 'images/logo2.png' %}" height="25" width="200"></a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active"></li>
+        </ul>
+    </div>
+
+    <span><a href="https://github.com/Efaz95/Localster#readme" target="_blank">About the app</a></span>
 </nav>
 
 
@@ -106,13 +120,13 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" name="username" placeholder="Username..." class="form-control">
+                        <input type="text" name="username" placeholder="Username..." class="form-control" required>
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="password" placeholder="Password..." class="form-control">
+                        <input type="password" name="password" placeholder="Password..." class="form-control" required>
                     </div>
 
                     <div class="d-flex justify-content-center mt-3 login_container">
