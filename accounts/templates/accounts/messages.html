@@ -4,6 +4,7 @@
 
     <br>
     <div class="card-deck">
+
         <div class="card card border-info mb-3 text-white bg-dark mb-3" id="inbox" style="width: 500px; height: 400px; overflow: auto">
             <div class="card-header">Inbox</div>
             {% for message in inbox %}
@@ -25,7 +26,6 @@
                 </ul>
             {% endfor %}
         </div>
-
 
         <div id="msg" style="display: none">
             <form action="{% url 'messages' %}" method="POST">
