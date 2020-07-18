@@ -79,7 +79,7 @@
                                 </a>
                             </td>
                             <td class="align-middle" style="width: 10%">
-                                <input class="btn btn-sm" type="button" onclick="reply()" value="Message">
+                                <a href="#msg"><input id="message-btn" class="btn btn-sm" type="button" onclick="reply()" value="Message"></a>
                                 <button value="{{ i.user }}" name="hired_influencer"
                                         class="btn btn-sm" onclick="clicked(event)">Hire
                                 </button>
@@ -126,12 +126,12 @@
             } else {
                 x.style.display = "none";
             }
+
         }
 
         function clicked(e) {
             if (!confirm('Select OK to confirm')) e.preventDefault();
         }
-
 
     </script>
 
