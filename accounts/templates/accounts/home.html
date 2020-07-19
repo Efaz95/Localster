@@ -62,7 +62,12 @@
                     {% csrf_token %}
                     <table class="table table-striped table-sm" >
                         <tr>
-                            <td class="align-middle" style="width: 10%" title="{{ i.user.username }}">{{ i.user.first_name }} {{ i.user.last_name }}</td>
+                            <td class="align-middle" style="width: 10%" onclick="copyToClipboard('.{{ i.user.id }}')">
+                                <p hidden class="{{ i.user.id }}">{{ i.user.username }}</p>
+                                <p style="display:inline" title="{{ i.user.username }}" data-toggle="tooltip" data-placement="bottom">
+                                    {{ i.user.first_name }} {{ i.user.last_name }}
+                                </p>
+                            </td>
                             <td id="bio" class="align-middle" style="width: 30%">{{ i.user.influencerprofile.bio }}</td>
                             <td class="align-middle" style="width: 10%">{{ i.user.influencerprofile.followers }} followers</td>
                             <td class="align-middle" style="width: 10%">
@@ -97,7 +102,7 @@
             <form action="{% url 'messages' %}" method="POST">
                 {% csrf_token %}
                 <label>Send to:</label>
-                <input type="text" name="msg_receiver" size="40px" placeholder="hover over ig link to see the username" required>
+                <input type="text" name="msg_receiver" size="40px" placeholder="copy username by clicking on the name" required>
 
                 <br><br>
 
@@ -131,6 +136,14 @@
 
         function clicked(e) {
             if (!confirm('Select OK to confirm')) e.preventDefault();
+        }
+
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
         }
 
     </script>

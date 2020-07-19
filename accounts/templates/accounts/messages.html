@@ -10,7 +10,11 @@
             {% for message in inbox %}
                 <ul>
                     <li>
-                        <strong>{{ message.sender.first_name }}</strong>: <span data-toggle="tooltip" data-placement="bottom" title="{{ message.sender.username }}">{{ message.msg_content }}</span>
+                        <strong onclick="copyToClipboard('.{{ message.id }}')" title="{{ message.sender.username }}" data-toggle="tooltip" data-placement="bottom">{{ message.sender.first_name }}</strong>:
+                        <span>
+                            {{ message.msg_content }}
+                        </span>
+                        <p hidden class="{{ message.id }}">{{ message.sender.username }}</p>
                         {% if message.is_read == False %}
                             <form action="{% url 'messages' %}" method="POST">
                                 {% csrf_token %}
@@ -32,7 +36,7 @@
                 {% csrf_token %}
                 <label>Send to:</label>
                 <input type="text" name="msg_receiver" size="40px"
-                       placeholder="hover over message to see the username" required>
+                       placeholder="copy username by clicking on the name" required>
                 <br>
                 <br>
                 <label>Message:</label>
@@ -74,6 +78,14 @@
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip();
         });
+
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
 
         function reply() {
             var x = document.getElementById("msg");
