@@ -14,3 +14,8 @@ Big companies only hire influencers with a large number of following. As a resul
 
 Businesses like local restaurants can sign up to Localsters and find influencers in their community. They can chat within our platform and if they find each other to be a good fit, the restaurant can then hire the influencer.  Influencers can customize their profile with their Bio and social media links.  
 
+## Real-time Messaging Demo
+I have implemented real time messaging tool for the users to communicate
+![messaging demo](http://g.recordit.co/golIhyzPrF.gif)
+
+
