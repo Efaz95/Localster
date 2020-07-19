@@ -62,7 +62,7 @@
                     {% csrf_token %}
                     <table class="table table-striped table-sm" >
                         <tr>
-                            <td class="align-middle" style="width: 10%">{{ i.user.first_name }} {{ i.user.last_name }}</td>
+                            <td class="align-middle" style="width: 10%" title="{{ i.user.username }}">{{ i.user.first_name }} {{ i.user.last_name }}</td>
                             <td id="bio" class="align-middle" style="width: 30%">{{ i.user.influencerprofile.bio }}</td>
                             <td class="align-middle" style="width: 10%">{{ i.user.influencerprofile.followers }} followers</td>
                             <td class="align-middle" style="width: 10%">
