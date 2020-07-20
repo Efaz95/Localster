@@ -1,5 +1,8 @@
 ### Localster
 
+[Demo](#real-time-messaging-demo)
+
+
 ## What is it about
 
 Localster is an app built to connect local businesses with local influencers.
