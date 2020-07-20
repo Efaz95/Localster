@@ -24,3 +24,7 @@ I have implemented real time messaging tool for the users to communicate
 ![messaging demo](http://g.recordit.co/golIhyzPrF.gif)
 
 
+## Future Implementations
+
+ - Integrate Payment system to allow businesses pay directly through our platform
+ - Improve Messaging tool using Web Sockets 
