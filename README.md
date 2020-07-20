@@ -1,6 +1,8 @@
 ### Localster
 
-[Demo](#real-time-messaging-demo)
+ - [What is it about?](#what-is-it-about)
+ - [How it works?](#how-it-works)
+ - [Demo for real-time messaging tool](#real-time-messaging-demo)
 
 
 ## What is it about
