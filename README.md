@@ -24,11 +24,13 @@ I have implemented real-time messaging tool using Python and Ajax for the users 
 
 ![messaging demo](http://g.recordit.co/golIhyzPrF.gif)
 
+## Searching and Hire Demo
+
+![messaging demo](http://g.recordit.co/OXVDaK6czm.gif)
 
 
 ## In Progress
  - Notification for a new message
-
 
 
 ## Future Implementations
