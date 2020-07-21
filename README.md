@@ -23,6 +23,10 @@ Businesses like local restaurants can sign up to Localsters and find influencers
 ## Real-time Messaging Demo
 I have implemented real-time messaging tool using Python and Ajax for the users to communicate.
 
+
+![messaging demo](http://g.recordit.co/golIhyzPrF.gif)
+
+
 View function for messaging:
 ```
 @login_required(login_url='login')
@@ -49,8 +53,6 @@ def user_messages(request):
 
     return render(request, 'accounts/messages.html', context)
 ```
-
-![messaging demo](http://g.recordit.co/golIhyzPrF.gif)
 
 ## Searching and Hire Demo
 
