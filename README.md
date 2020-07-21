@@ -3,6 +3,7 @@
  - [What is it about?](#what-is-it-about)
  - [How it works?](#how-it-works)
  - [Demo for real-time messaging tool](#real-time-messaging-demo)
+ - [Future Implementations](#future-implementations)
 
 
 ## What is it about
