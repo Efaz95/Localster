@@ -25,6 +25,12 @@ I have implemented real-time messaging tool using Python and Ajax for the users 
 ![messaging demo](http://g.recordit.co/golIhyzPrF.gif)
 
 
+
+## In Progress
+ - Notification for a new message
+
+
+
 ## Future Implementations
 
  - Integrate Payment system to allow businesses pay directly through our platform
