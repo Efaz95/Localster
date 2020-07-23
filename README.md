@@ -27,7 +27,7 @@ I have implemented real-time messaging tool using Python and Ajax for the users 
 ![messaging demo](http://g.recordit.co/golIhyzPrF.gif)
 
 
-View function for messaging:
+Controller:
 ```
 @login_required(login_url='login')
 def user_messages(request):
@@ -52,6 +52,15 @@ def user_messages(request):
     context = {'inbox': inbox, 'outbox': outbox, 'time_now': time_now}
 
     return render(request, 'accounts/messages.html', context)
+```
+Model:
+```
+class Messages(models.Model):
+    sender = models.ForeignKey(User, related_name="sender", on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, related_name="receiver", on_delete=models.CASCADE)
+    msg_content = models.TextField(max_length=200)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
 ```
 
 ## Searching and Hire Demo
