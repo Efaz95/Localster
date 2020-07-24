@@ -27,7 +27,7 @@ I have implemented real-time messaging tool using Python and Ajax for the users 
 ![messaging demo](http://g.recordit.co/golIhyzPrF.gif)
 
 
-Controller:
+<u>Controller:</u>
 ```
 @login_required(login_url='login')
 def user_messages(request):
@@ -53,7 +53,7 @@ def user_messages(request):
 
     return render(request, 'accounts/messages.html', context)
 ```
-Model:
+<u>Model:</u>
 ```
 class Messages(models.Model):
     sender = models.ForeignKey(User, related_name="sender", on_delete=models.CASCADE)
