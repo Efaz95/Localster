@@ -69,7 +69,7 @@ class Messages(models.Model):
 
 
 ## In Progress
- - Notification for a new message
+ - Notification alerts for a new message
 
 
 ## Future Implementations
