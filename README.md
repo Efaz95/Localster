@@ -69,10 +69,10 @@ class Messages(models.Model):
 
 
 ## In Progress
- - Notification alerts for a new message
+ - [ ] Notification alerts for a new message
 
 
 ## Future Implementations
 
- - Integrate Payment system to allow businesses pay directly through our platform
- - Improve Messaging tool using Web Sockets 
+ - [ ] Integrate Payment system to allow businesses pay directly through our platform
+ - [ ] Improve Messaging tool using Web Sockets 
