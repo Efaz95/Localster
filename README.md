@@ -65,7 +65,7 @@ class Messages(models.Model):
 
 ## Searching and Hire Demo
 
-![messaging demo](http://g.recordit.co/OXVDaK6czm.gif)
+![messaging demo](http://g.recordit.co/dVrdkFDN8p.gif)
 
 
 ## In Progress
