@@ -33,6 +33,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
     function load_messages() {
+            let numOfMsgs = 0;
             $.ajax({
                 url: '{% url 'msgs_json' %}',
                 datatype: 'json',
@@ -40,8 +41,14 @@
                 success: function (body) {
                     body.forEach(function (b) {
                         if (b.fields.is_read === false) {
+                            numOfMsgs += 1;
                             document.getElementById("msg1").innerHTML = "Messages❗️";
-                            document.getElementById('msg1').setAttribute('title', "You have new messages!");
+                            if (numOfMsgs === 1){
+                                document.getElementById('msg1').setAttribute('title', "You have " + numOfMsgs + " new message!");
+                            }
+                            else{
+                                document.getElementById('msg1').setAttribute('title', "You have " + numOfMsgs + " new messages!");
+                            }
                         }
                     });
                 }

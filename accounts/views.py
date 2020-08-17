@@ -149,7 +149,6 @@ def user_messages(request):
 
 @login_required(login_url='login')
 def msgs_json(request):
-    time_now = datetime.datetime.now()
     user = request.user
 
     inbox = Messages.objects.filter(receiver=user).order_by('-timestamp')
